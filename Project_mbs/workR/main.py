@@ -26,7 +26,6 @@ Contact : info@robotran.be
 (c) Universite catholique de Louvain
 """
 import numpy as np
-import pandas as pd
 # %%===========================================================================
 # Packages loading
 # =============================================================================
@@ -47,9 +46,7 @@ print(mbs_data.joint_id)
 print(mbs_data.extforce_id)
 
 mbs_data.reference_trajectory = np.loadtxt('../Walking_Patterns/WP.csv', skiprows=1, usecols=range(5), delimiter=',')
-print(mbs_data.reference_trajectory)
 mbs_data.frequency = 50
-
 
 
 # %%===========================================================================

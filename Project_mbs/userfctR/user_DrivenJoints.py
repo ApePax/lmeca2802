@@ -27,8 +27,8 @@ def user_DrivenJoints(mbs_data, tsim):
     # mbs_data.qdd[5] = 2
     # mbs_data.qd[5]  = mbs_data.qd0[5] + mbs_data.qdd[5]*tsim
     # mbs_data.q[5]   = mbs_data.q0[5]  + mbs_data.qd0[5]*tsim + 0.5 * mbs_data.qdd[5]*tsim*tsim
-    fixed_translations_ids = [mbs_data.joints["T_lh_fixed"], mbs_data.joints["T_rh_fixed"],
-                              mbs_data.joints["T_lk_fixed"],mbs_data.joints["T_lk_fixed"],mbs_data.joints["R_hip"] ]
+    fixed_translations_ids = [mbs_data.joint_id["T_lh_fixed"], mbs_data.joint_id["T_rh_fixed"],
+                              mbs_data.joint_id["T_lk_fixed"],mbs_data.joint_id["T_lk_fixed"],mbs_data.joint_id["R_hip"] ]
     for elem in fixed_translations_ids:
         mbs_data.q[elem]    = 0
         mbs_data.qd[elem]   = 0
