@@ -3,7 +3,6 @@
 # Author: Robotran Team
 # (c) Universite catholique de Louvain, 2020
 
-
 def user_JointForces(mbs_data, tsim):
     """Compute the force and torques in the joint.
 
@@ -28,6 +27,13 @@ def user_JointForces(mbs_data, tsim):
     """
     # cleaning previous forces value
     mbs_data.Qq[1:] = 0.
+    motor_ids = [mbs_data.joint_id["R_lh"],mbs_data.joint_id["R_rh"] ,mbs_data.joint_id["R_lk"],mbs_data.joint_id["R_rk"]]
+    q_motors  = [mbs_data.q[motor_ids[0]] , mbs_data.q[motor_ids[1]] ,mbs_data.q[motor_ids[2]] ,mbs_data.q[motor_ids[3]]]
+    qd_motors = [mbs_data.qd[motor_ids[0]], mbs_data.qd[motor_ids[1]],mbs_data.qd[motor_ids[2]],mbs_data.qd[motor_ids[3]]]
+
+    trajectory_index = int(tsim // mbs_data.frequency)
+    q_ref = mbs_data.reference_trajectory[trajectory_index][1:]
+    #print(q_ref)
 
 
     # Example: damping in joint number 5
