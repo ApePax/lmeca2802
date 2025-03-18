@@ -31,6 +31,7 @@ Contact : info@robotran.be
 # =============================================================================
 try:
     import MBsysPy as Robotran
+    from MBsysPy import MbsSensor
 except:
     raise ImportError("MBsysPy not found/installed."
                       "See: https://www.robotran.eu/download/how-to-install/"
@@ -39,7 +40,15 @@ except:
 # %%===========================================================================
 # Project loading
 # =============================================================================
-mbs_data = Robotran.MbsData("../dataR/Project_mbs.mbs")
+mbs_data = Robotran.MbsData("../dataR/Philippides_visu.mbs")
+print("USER PRINTS")
+print(mbs_data.body_id)
+print(mbs_data.joint_id)
+print(mbs_data.sensor_id)
+print(mbs_data.points_id)
+my_sensor = MbsSensor(mbs_data)
+#my_sensor.com
+print(my_sensor[0])
 
 # %%===========================================================================
 # Partitionning
