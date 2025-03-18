@@ -25,7 +25,7 @@ Contact : info@robotran.be
 
 (c) Universite catholique de Louvain
 """
-
+import pandas as pd
 # %%===========================================================================
 # Packages loading
 # =============================================================================
@@ -44,7 +44,14 @@ mbs_data = Robotran.MbsData("../dataR/Philippides_visu.mbs")
 print("USER PRINTS")
 print(mbs_data.body_id)
 print(mbs_data.joint_id)
-print(mbs_data.extforce_id)
+print(mbs_data.sensor_id)
+print(mbs_data.points_id)
+my_sensor = MbsSensor(mbs_data)
+#my_sensor.com
+print(my_sensor[0]) 
+mbs_data.ref_trajectories = pd.read_csv("../Walking_Patterns/WP.csv", usecols=range(6))
+
+
 
 # %%===========================================================================
 # Partitionning

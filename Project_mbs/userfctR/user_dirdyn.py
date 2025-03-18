@@ -28,6 +28,8 @@ def user_dirdyn_init(mbs_data, mbs_dirdyn):
     #
     # mbs_data.my_sensor = Robotran.MbsSensor(mbs_data)
     # mbs_data.my_sensor_v = []
+    
+    mbs_data.define_input_vector("../Walking_Patterns/WP.csv")
 
     return
 
