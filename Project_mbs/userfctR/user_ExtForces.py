@@ -3,6 +3,208 @@
 # Author: Robotran Team
 # (c) Universite catholique de Louvain, 2019
 
+import numpy as np
+class Contact_Manager:
+    def __init__(self, nSensors):
+        """
+        Initialize the memory of the contact points for the tangential contact forces.
+
+        Parameters:
+            nSensors (int) : Number of force sensors + 1
+            Contact_PxF : Positions of the contact points for each sensor
+            Previous_PxF : Previous position of the sensor
+            InContact : Status of the sensor { 0: no contact, 1: contact }
+        """
+        self.nSensors = nSensors
+        self.Contact_PxF  = np.full((nSensors, 4), np.nan)
+        self.Previous_PxF = np.full((nSensors, 4), np.nan)
+        self.InContact    = np.zeros(nSensors, dtype=int)
+        return 
+    
+    def update_contact(self, ixF, PxF):
+        """
+        Update the contact memory with the new sensor position.
+        If a contact is detected (Zsensor < 0) the contact point is computed and the status is updated.
+
+        Parameters:
+            ixF : Sensor ID
+            PxF : Current position of the sensor
+        """
+        PxF = PxF[:4]  # [&, x, y, z]
+        # Initialization
+        if np.isnan(self.Previous_PxF[ixF, 0]):     # Nan -> PxF is the initial position
+            self.Previous_PxF[ixF] = PxF            #
+            if PxF[3] <= 0:                         # Initial position in conact -> contact point set at interface z =0
+                self.Contact_PxF[ixF] = PxF         #
+                self.Contact_PxF[ixF, 3] = 0.0      #
+                self.InContact[ixF] = 1             #
+        
+        # Detection of penetration
+        if PxF[3] <= 0:                                                                                                 # Penetration
+            if self.InContact[ixF] == 0:                                                                                # Contact initiation
+                ratio = self.Previous_PxF[ixF, 3] / (self.Previous_PxF[ixF, 3] - PxF[3])                                # Linear interpolation to find 
+                self.Contact_PxF[ixF, :4] = self.Previous_PxF[ixF, :4] + ratio * (PxF - self.Previous_PxF[ixF, :4])     #   exact contact point
+                self.Contact_PxF[ixF, 3] = 0.0                                                                          # Ensure z = 0 (redundant)
+                self.InContact[ixF] = 1                                                                                 # Update status
+        else:
+            self.InContact[ixF] = 0     # Update the status if contact is interrupted
+        self.Previous_PxF[ixF] = PxF    # 
+
+        return
+    
+    def update_slip_contact(self, ixF, PxF, delta_slip_x, delta_slip_y, slip):
+        """
+        Update the position of the contact point when slip is detected
+
+        Parameters:
+            ixF : Sensor ID
+            PxF : Current position of the sensor
+            delta_slip_x : Distance between the contact point and the position of the sensor along x during slip
+            delta_slip_y :  "" along y
+            slip (int) : binary {0: stick , 1: slip}
+        """
+        if slip == 1 and self.InContact[ixF] == 1:                                       
+            self.Contact_PxF[ixF, 1:3] = PxF[1:3] -np.array([delta_slip_x, delta_slip_y]) 
+        return
+    
+    def compute_penetrations(self, ixF, PxF, VxF):
+        """
+        Compute the penetrations and penetrations speeds along all directions with respect to the contact point
+
+        Parameters:
+            ixF : Sensor ID
+            PxF : Current position of the sensor
+            VxF : Current speed of the sensor
+        
+        Returns:
+            deltas : Penetrations in the inertial frame
+            deltas_dot : Penetration speeds in the inertial frame
+        """
+        deltas = np.zeros(3)                                    # Penetrations set to 0 
+        deltas_dot = np.zeros(3)                                #   if no contact
+        if self.InContact[ixF] == 1:                            # 
+            deltas = PxF[1:4] - self.Contact_PxF[ixF, 1:4]      # Current position - Contact position
+            deltas_dot = VxF[1:4]                               # Penetration speeds are the sensor speeds
+        return deltas, deltas_dot
+
+
+class HuntCrossleyHertz:
+    def __init__(self, k, n, d):
+        """
+        Initialize the Hunt-Crossley Hertz contact model.
+
+        Parameters:
+        k (float): Stiffness coefficient 
+        n (float): Nonlinearity exponent (usually 3/2 for Hertzian contact)
+        d (float): Damping coefficient
+        """
+        self.k = k
+        self.n = n
+        self.d = d
+
+    def compute_normal_force(self, delta, delta_dot):
+        """
+        Compute the normal contact force.
+
+        Parameters:
+        delta (float): Penetration depth (m)
+        delta_dot (float): Penetration rate (m/s)
+
+        Returns:
+        float: Normal force (N)
+        """
+        if delta < 0:                                                          # Detect penetration
+            Fz = self.k * (abs(delta) ** self.n) * (1 - self.d * delta_dot)    # H-C-H model
+        else:                                                                  #
+            Fz = 0                                                             # No force if there's no contact
+        return Fz
+
+
+class ViscoelasticCoulombModel:
+    def __init__(self, mu, k, d):
+        """
+        Initialize the Viscoelastic Coulomb contact model.
+
+        Parameters:
+        mu (float): Coefficient of friction
+        k (float): Stiffness coefficient
+        d (float): Damping coefficient
+        """
+        self.mu = mu
+        self.k = k
+        self.d = d
+
+    def compute_tangential_force(self, F_n, delta_x, delta_x_dot, delta_y, delta_y_dot):
+        """
+        Compute the tangential friction force.
+
+        Parameters:
+        F_n (float): Normal force (N)
+        delta_x, delta_y (float): Tangential penetrations (m)
+        delta_x_dot, delta_y_dot (float): Tangential penetration velocities (m/s)
+
+        Returns:
+            Fx, Fy : Forces along x and y with respect to the sensor position in the inertial frame
+            delta_no_slip_x, delta_no_slip_y : Distances between the contact point and the current position along x and y
+            slip : {0: no lateral slip, 1: lateral slip}
+        """
+        # Compute raw viscoelastic forces
+        # F = -k x - d x_dot
+        Fx = -self.k * delta_x - self.d * delta_x_dot   
+        Fy = -self.k * delta_y - self.d * delta_y_dot  
+
+        # Compute total force magnitude
+        F_total = np.sqrt(Fx**2 + Fy**2)
+        # Maximum Coulomb force
+        F_max = self.mu * F_n                           
+
+        # Initialisation /!\ Not accurate if no slippage
+        delta_no_slip_x, delta_no_slip_y = 0, 0        
+        slip = 0
+
+        # Apply saturation
+        if F_total > max(F_max,0):
+            scaling_factor = F_max / F_total                        # Force normalisation respecting proportions
+            Fx *= scaling_factor                                    #
+            Fy *= scaling_factor                                    #
+            delta_no_slip_x = -(Fx + self.d * delta_x_dot) / self.k # Inverse ViscoElsatic model for Coulomb saturated forces
+            delta_no_slip_y = -(Fy + self.d * delta_y_dot) / self.k # 
+            slip = 1                                                # Update slip status
+          
+        return Fx, Fy, delta_no_slip_x, delta_no_slip_y, slip
+    
+    def compute_normal_force(self, delta, delta_dot):
+        """ 
+        Compute normal force using a viscoelastic model.
+
+        Parameters:
+            delta : Normal penetration
+            delta_dot : Normal penetration speed
+        """
+        # ViscoElastic Model
+        if(delta <= 0):
+            Fz = -self.k * delta - self.d * delta_dot   
+        else:
+            Fz = 0
+        return Fz
+
+# Normal Model Choice 0: Hunt-Crossley-Hertz, 1: Viscoelastic Coulomb
+Model = 0
+# Instantiate a Hunt-Crossley-Hertz friction model
+k = 5e4       # Stiffness coefficient
+n = 1.5       # Nonlinearity exponent (3/2 for Hertzian contact)
+d = 0.1       # Damping coefficient
+hch_model = HuntCrossleyHertz(k, n, d)
+
+# Instantiate a ViscoElastic Coulomb model
+mu = 0.8      # Coefficient of friction
+k = 2e4       # Stiffness coefficient
+d = 100.0     # Damping coefficient
+vc_model = ViscoelasticCoulombModel(mu, k, d)
+
+# Instantiate a ContactManager
+cm = Contact_Manager(11) # For 10 sensors to be accessed through their ID
+
 
 def user_ExtForces(PxF, RxF, VxF, OMxF, AxF, OMPxF, mbs_data, tsim, ixF):
     """Compute an user-specified external force.
@@ -61,13 +263,36 @@ def user_ExtForces(PxF, RxF, VxF, OMxF, AxF, OMPxF, mbs_data, tsim, ixF):
     Mz = 0.0
     idpt = mbs_data.xfidpt[ixF]
     dxF = mbs_data.dpt[1:, idpt]
+    """Compute user-defined external forces."""
+    # Update contact information
+    cm.update_contact(ixF, PxF)
 
-    # Example : Contact force with a wall when X coordinate is higher than 1m.
-    #           The force is perfectly horizontal (inertial frame)
-    # xlim = 1.0 # m
-    # kwall= 1e5 # N/m
-    # if PxF[1]>xlim:
-    #     Fx = (PxF[1]-xlim)*kwall
+    # Compute penetrations
+    deltas, deltas_dot = cm.compute_penetrations(ixF, PxF, VxF)
+    # Normal force computation
+    # 0: Hunt-Crossley-Hertz, 1: Viscoelastic Coulomb
+    if Model == 0:
+        Fz = hch_model.compute_normal_force(deltas[2], deltas_dot[2])
+    elif Model == 1:
+        Fz = vc_model.compute_normal_force(deltas[2], deltas_dot[2])
+
+    # Compute tangential forces
+    Fx, Fy, delta_slip_x, delta_slip_y, slip = vc_model.compute_tangential_force(
+        Fz, deltas[0], deltas_dot[0], deltas[1], deltas_dot[1]
+    )
+
+    # Update slip contact
+    cm.update_slip_contact(ixF, PxF, delta_slip_x, delta_slip_y, slip)
+
+
+    """
+     Example : Contact force with a wall when X coordinate is higher than 1m.
+               The force is perfectly horizontal (inertial frame)
+     xlim = 1.0 # m
+     kwall= 1e5 # N/m
+     if PxF[1]>xlim:
+         Fx = (PxF[1]-xlim)*kwall
+    """
 
     # Concatenating force, torque and force application point to returned array.
     # This must not be modified.
