@@ -1,0 +1,14 @@
+
+##############################################################
+#	file7.gen 21/03/2025 13:27:21    messages
+##############################################################
+Symbolic generation file : /usr/local/robotran/users/MECA2802/upload/file7.gen
+Project: /usr/local/robotran/users/MECA2802/upload/upload.mbs
+F2 - Recursive Inverse Dynamics of tree-like MBS
+
+##############################################################
+#	file0.gen 21/03/2025 13:27:21    messages
+##############################################################
+Symbolic generation file : /usr/local/robotran/users/MECA2802/upload/file0.gen
+Project: /usr/local/robotran/users/MECA2802/upload/upload.mbs
+F1 - Recursive Direct Dynamics of tree-like MBS

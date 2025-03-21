@@ -10,7 +10,7 @@
 #
 #	http://www.robotran.be 
 #
-#	==> Generation Date: Tue Mar 18 16:14:38 2025
+#	==> Generation Date: Fri Mar 21 13:27:21 2025
 #	==> using automatic loading with extension .mbs 
 #
 #	==> Project name: Project_mbs
@@ -61,9 +61,10 @@ def invdyna(phi,s,tsim):
  
 # Forward Kinematics
 
+    ALPHA32 = qdd[2]-s.g[3]
     BS93 = -qd[3]*qd[3]
-    ALPHA13 = qdd[1]*C3-qdd[2]*S3
-    ALPHA33 = qdd[1]*S3+qdd[2]*C3
+    ALPHA13 = qdd[1]*C3-ALPHA32*S3
+    ALPHA33 = qdd[1]*S3+ALPHA32*C3
     BS94 = -qd[3]*qd[3]
     ALPHA14 = ALPHA13+(2.0)*qd[3]*qd[4]+qdd[3]*Dz43
     ALPHA34 = qdd[4]+ALPHA33+BS93*Dz43

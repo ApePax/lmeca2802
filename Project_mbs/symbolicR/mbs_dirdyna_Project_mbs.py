@@ -10,7 +10,7 @@
 #
 #	http://www.robotran.be 
 #
-#	==> Generation Date: Tue Mar 18 16:14:38 2025
+#	==> Generation Date: Fri Mar 21 13:27:21 2025
 #	==> using automatic loading with extension .mbs 
 #
 #	==> Project name: Project_mbs
@@ -57,9 +57,11 @@ def dirdyna(M, c, s, tsim):
 # Forward Kinematics
 
     BS93 = -qd[3]*qd[3]
+    AF13 = s.g[3]*S3
+    AF33 = -s.g[3]*C3
     BS94 = -qd[3]*qd[3]
-    AF14 = (2.0)*qd[3]*qd[4]
-    AF34 = BS93*Dz43
+    AF14 = AF13+(2.0)*qd[3]*qd[4]
+    AF34 = AF33+BS93*Dz43
     OM25 = qd[3]+qd[5]
     BS95 = -OM25*OM25
     AF15 = AF14*C5-AF34*S5
@@ -107,8 +109,8 @@ def dirdyna(M, c, s, tsim):
     AM18_7 = s.dpt[3,7]*C8
     AM38_7 = s.dpt[3,7]*S8
     BS99 = -qd[3]*qd[3]
-    AF19 = (2.0)*qd[3]*qd[9]
-    AF39 = BS93*Dz93
+    AF19 = AF13+(2.0)*qd[3]*qd[9]
+    AF39 = AF33+BS93*Dz93
     OM210 = qd[10]+qd[3]
     BS910 = -OM210*OM210
     AF110 = AF19*C10-AF39*S10
@@ -438,8 +440,10 @@ def dirdyna(M, c, s, tsim):
     FM34_3 = -FM15_3*S5+FM35_3*C5
     CM24_3 = s.In[5,4]+CM25_3+FB14_3*s.l[3,4]
     FM34_4 = s.m[4]-FM15_4*S5+FM35_4*C5
-    FF13 = -s.frc[1,3]+FF14+FF19
-    FF33 = -s.frc[3,3]+FF34+FF39
+    FA13 = -s.frc[1,3]+s.m[3]*AF13
+    FA33 = -s.frc[3,3]+s.m[3]*AF33
+    FF13 = FA13+FF14+FF19
+    FF33 = FA33+FF34+FF39
     CF23 = -s.trq[2,3]+CF24+CF29+FF14*Dz43+FF19*Dz93
     FB13_1 = s.m[3]*C3
     FB33_1 = s.m[3]*S3

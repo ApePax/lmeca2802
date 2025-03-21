@@ -2,7 +2,7 @@
 """Module for defining user function required to compute external forces."""
 # Author: Robotran Team
 # (c) Universite catholique de Louvain, 2019
-
+#TODO: Ajuster les valeur des modèle de contact (avec Brieuc)
 import numpy as np
 class Contact_Manager:
     def __init__(self, nSensors):

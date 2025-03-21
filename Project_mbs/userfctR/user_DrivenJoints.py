@@ -3,7 +3,6 @@
 # Author: Robotran Team
 # (c) Universite catholique de Louvain, 2020
 
-
 def user_DrivenJoints(mbs_data, tsim):
     """Set the values of the driven joints directly in the MbsData structure.
 
@@ -21,12 +20,9 @@ def user_DrivenJoints(mbs_data, tsim):
     -------
     None
     """
+    # The motors are rigidly linked to the hip/thighs
+    # The rotation of the hip is kept locked for the moment
 
-    # Example: joint 5 under constant acceleration with non-zero initial
-    #          coordinate (mbs_data.q0) and velocity (mbs_data.qd0).
-    # mbs_data.qdd[5] = 2
-    # mbs_data.qd[5]  = mbs_data.qd0[5] + mbs_data.qdd[5]*tsim
-    # mbs_data.q[5]   = mbs_data.q0[5]  + mbs_data.qd0[5]*tsim + 0.5 * mbs_data.qdd[5]*tsim*tsim
     fixed_translations_ids = [mbs_data.joint_id["T_lh_fixed"], mbs_data.joint_id["T_rh_fixed"],
                               mbs_data.joint_id["T_lk_fixed"],mbs_data.joint_id["T_lk_fixed"],mbs_data.joint_id["R_hip"] ]
     for elem in fixed_translations_ids:

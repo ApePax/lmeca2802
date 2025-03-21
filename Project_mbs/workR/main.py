@@ -44,8 +44,9 @@ print("USER PRINTS")
 print(mbs_data.body_id)
 print(mbs_data.joint_id)
 print(mbs_data.extforce_id)
-
-mbs_data.reference_trajectory = np.loadtxt('../Walking_Patterns/WP.csv', skiprows=1, usecols=range(5), delimiter=',')
+# Moved to user_jointForces 
+# TODO: l'interfacer proprement
+# mbs_data.reference_trajectory = np.loadtxt('../Walking_Patterns/WP.csv', skiprows=1, usecols=range(5), delimiter=',')
 mbs_data.frequency = 50
 
 
@@ -56,7 +57,7 @@ mbs_data.process = 1
 mbs_part = Robotran.MbsPart(mbs_data)
 mbs_part.set_options(rowperm=1, verbose=1)
 mbs_part.run()
-
+"""
 # =============================================================================
 # Equilibrium
 # =============================================================================
@@ -65,6 +66,7 @@ mbs_equil = Robotran.MbsEquil(mbs_data)
 mbs_equil.set_options(method=1, senstol=1e-2, verbose=1)
 mbs_equil.run()
 
+
 # =============================================================================
 # Modal Analysis
 # =============================================================================
@@ -72,15 +74,15 @@ mbs_data.process = 4
 mbs_modal = Robotran.MbsModal(mbs_data)
 mbs_modal.set_options(save_result=1, save_anim=1, mode_ampl=0.2)
 mbs_modal.run()
-
+"""
 # =============================================================================
 # Direct Dynamics
 # =============================================================================
 mbs_data.process = 3
 mbs_dirdyn = Robotran.MbsDirdyn(mbs_data)
-mbs_dirdyn.set_options(dt0=1e-3, tf=10.0, save2file=1)
+mbs_dirdyn.set_options(dt0=1e-3, tf=10.0, save2file=0.1)
 mbs_dirdyn.run()
-
+"""
 # =============================================================================
 # Inverse Kinematics
 # =============================================================================
@@ -101,6 +103,7 @@ mbs_invdyn = Robotran.MbsInvdyn(mbs_data)
 mbs_invdyn.set_options(trajectoryqname="../resultsR/dirdyn_q.res")
 mbs_invdyn.set_options(trajectoryqdname="../resultsR/dirdyn_qd.res")
 mbs_invdyn.set_options(trajectoryqddname="../resultsR/dirdyn_qdd.res")
-mbs_invdyn.set_options(t0=0.0, tf=5.0, dt=1e-3)
+mbs_invdyn.set_options(t0=0.0, tf=1.0, dt=1e-3)
 mbs_invdyn.set_options(motion="trajectory")
 mbs_invdyn.run()
+"""
