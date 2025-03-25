@@ -1,0 +1,1718 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mbsDescR7>
+  <mbsname>philippides</mbsname>
+  <mbsyspad_version>1.26.0</mbsyspad_version>
+  <base>
+    <!--this is the base body-->
+    <gravity>
+      <coordinates>
+        <x>0.0</x>
+        <y>0.0</y>
+        <z>0.0</z>
+      </coordinates>
+    </gravity>
+    <baseBodyName>Body_0</baseBodyName>
+    <point>
+      <pointname>Point_0</pointname>
+      <coordinates>
+        <x>0.0</x>
+        <y>0.0</y>
+        <z>0.0</z>
+      </coordinates>
+      <graphics>
+        <x2D>
+          <position>
+            <x>208.0</x>
+            <y>461.0</y>
+          </position>
+        </x2D>
+        <x3D />
+      </graphics>
+    </point>
+    <graphics>
+      <x2D>
+        <position>
+          <x>207.0</x>
+          <y>633.0</y>
+        </position>
+        <base_body>
+          <position>
+            <x>-70.0</x>
+            <y>-52.0</y>
+          </position>
+          <name_pos>
+            <x>0.0</x>
+            <y>0.0</y>
+          </name_pos>
+          <shape>rectangle</shape>
+          <size>
+            <x>149.0</x>
+            <y>100.0</y>
+          </size>
+          <control_points>
+            <control_point>
+              <x>79.0</x>
+              <y>-52.0</y>
+            </control_point>
+            <control_point>
+              <x>79.0</x>
+              <y>48.0</y>
+            </control_point>
+            <control_point>
+              <x>-70.0</x>
+              <y>48.0</y>
+            </control_point>
+            <control_point>
+              <x>-70.0</x>
+              <y>-52.0</y>
+            </control_point>
+          </control_points>
+          <angle>0.0</angle>
+        </base_body>
+      </x2D>
+      <x3D>
+        <x3D_points />
+        <x3D_lines />
+      </x3D>
+    </graphics>
+  </base>
+  <bodytree>
+    <!--this is the body tree-->
+    <body>
+      <bodyname>small_link_boom</bodyname>
+      <parent>
+        <bodyname>base</bodyname>
+        <pointname>Point_0</pointname>
+      </parent>
+      <joint>
+        <jointname>Joint_0</jointname>
+        <type>T1</type>
+        <nature>independent</nature>
+        <graphics>
+          <x2D>
+            <position>
+              <x>228.0</x>
+              <y>307.0</y>
+            </position>
+          </x2D>
+          <x3D>
+            <x3D_joint />
+            <x3D_frame />
+          </x3D>
+        </graphics>
+      </joint>
+      <com>
+        <coordinates>
+          <x>0.0</x>
+          <y>0.0175</y>
+          <z>0.0</z>
+        </coordinates>
+      </com>
+      <graphics>
+        <x2D>
+          <position>
+            <x>-49.0</x>
+            <y>-49.0</y>
+          </position>
+          <name_pos>
+            <x>0.0</x>
+            <y>0.0</y>
+          </name_pos>
+          <shape>rectangle</shape>
+          <size>
+            <x>149.0</x>
+            <y>65.0</y>
+          </size>
+          <control_points>
+            <control_point>
+              <x>100.0</x>
+              <y>-49.0</y>
+            </control_point>
+            <control_point>
+              <x>100.0</x>
+              <y>16.0</y>
+            </control_point>
+            <control_point>
+              <x>-49.0</x>
+              <y>16.0</y>
+            </control_point>
+            <control_point>
+              <x>-49.0</x>
+              <y>-49.0</y>
+            </control_point>
+          </control_points>
+          <angle>0.5090310448589312</angle>
+        </x2D>
+        <x3D>
+          <x3D_com />
+          <x3D_points />
+          <x3D_lines />
+        </x3D>
+      </graphics>
+    </body>
+    <body>
+      <bodyname>Boom</bodyname>
+      <parent>
+        <bodyname>small_link_boom</bodyname>
+        <pointname>origin</pointname>
+      </parent>
+      <joint>
+        <jointname>Joint_1</jointname>
+        <type>T3</type>
+        <nature>independent</nature>
+        <graphics>
+          <x2D>
+            <position>
+              <x>256.0</x>
+              <y>94.0</y>
+            </position>
+          </x2D>
+          <x3D>
+            <x3D_joint />
+            <x3D_frame />
+          </x3D>
+        </graphics>
+      </joint>
+      <com>
+        <coordinates>
+          <x>0.0</x>
+          <y>0.5475</y>
+          <z>0.0</z>
+        </coordinates>
+      </com>
+      <point>
+        <pointname>Point_0</pointname>
+        <coordinates>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>0.0</z>
+        </coordinates>
+        <graphics>
+          <x2D>
+            <position>
+              <x>418.0</x>
+              <y>79.0</y>
+            </position>
+          </x2D>
+          <x3D />
+        </graphics>
+      </point>
+      <graphics>
+        <x2D>
+          <position>
+            <x>-54.0</x>
+            <y>-47.0</y>
+          </position>
+          <name_pos>
+            <x>0.0</x>
+            <y>0.0</y>
+          </name_pos>
+          <shape>rectangle</shape>
+          <size>
+            <x>231.0</x>
+            <y>58.0</y>
+          </size>
+          <control_points>
+            <control_point>
+              <x>177.0</x>
+              <y>-47.0</y>
+            </control_point>
+            <control_point>
+              <x>177.0</x>
+              <y>11.0</y>
+            </control_point>
+            <control_point>
+              <x>-54.0</x>
+              <y>11.0</y>
+            </control_point>
+            <control_point>
+              <x>-54.0</x>
+              <y>-47.0</y>
+            </control_point>
+          </control_points>
+          <angle>0.0</angle>
+        </x2D>
+        <x3D>
+          <x3D_com />
+          <x3D_points />
+          <x3D_lines />
+        </x3D>
+      </graphics>
+    </body>
+    <body>
+      <bodyname>hip</bodyname>
+      <parent>
+        <bodyname>Boom</bodyname>
+        <pointname>Point_0</pointname>
+      </parent>
+      <joint>
+        <jointname>Joint_2</jointname>
+        <type>R2</type>
+        <nature>independent</nature>
+        <graphics>
+          <x2D>
+            <position>
+              <x>566.0</x>
+              <y>84.0</y>
+            </position>
+          </x2D>
+          <x3D>
+            <x3D_joint />
+            <x3D_frame />
+          </x3D>
+        </graphics>
+      </joint>
+      <mass>0.0625</mass>
+      <com>
+        <coordinates>
+          <x>0.0</x>
+          <y>0.05</y>
+          <z>0.0</z>
+        </coordinates>
+      </com>
+      <inertia>
+        <Ixx>5.26E-6</Ixx>
+        <Iyy>1.3542E-6</Iyy>
+        <Izz>6.51E-6</Izz>
+      </inertia>
+      <point>
+        <pointname>Point_0</pointname>
+        <coordinates>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>0.0</z>
+        </coordinates>
+        <graphics>
+          <x2D>
+            <position>
+              <x>657.0</x>
+              <y>118.0</y>
+            </position>
+          </x2D>
+          <x3D />
+        </graphics>
+      </point>
+      <point>
+        <pointname>Point_1</pointname>
+        <coordinates>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>0.0</z>
+        </coordinates>
+        <graphics>
+          <x2D>
+            <position>
+              <x>1196.0</x>
+              <y>114.0</y>
+            </position>
+          </x2D>
+          <x3D />
+        </graphics>
+      </point>
+      <graphics>
+        <x2D>
+          <position>
+            <x>-11.0</x>
+            <y>-16.0</y>
+          </position>
+          <name_pos>
+            <x>0.0</x>
+            <y>0.0</y>
+          </name_pos>
+          <shape>rectangle</shape>
+          <size>
+            <x>768.0</x>
+            <y>61.0</y>
+          </size>
+          <control_points>
+            <control_point>
+              <x>757.0</x>
+              <y>-16.0</y>
+            </control_point>
+            <control_point>
+              <x>757.0</x>
+              <y>45.0</y>
+            </control_point>
+            <control_point>
+              <x>-11.0</x>
+              <y>45.0</y>
+            </control_point>
+            <control_point>
+              <x>-11.0</x>
+              <y>-16.0</y>
+            </control_point>
+          </control_points>
+          <angle>0.0</angle>
+        </x2D>
+        <x3D>
+          <x3D_com />
+          <x3D_points />
+          <x3D_lines />
+        </x3D>
+      </graphics>
+    </body>
+    <body>
+      <bodyname>Motor_l1</bodyname>
+      <parent>
+        <bodyname>hip</bodyname>
+        <pointname>Point_0</pointname>
+      </parent>
+      <joint>
+        <jointname>Joint_3</jointname>
+        <type>T3</type>
+        <nature>independent</nature>
+        <graphics>
+          <x2D>
+            <position>
+              <x>654.0</x>
+              <y>214.0</y>
+            </position>
+          </x2D>
+          <x3D>
+            <x3D_joint />
+            <x3D_frame />
+          </x3D>
+        </graphics>
+      </joint>
+      <mass>0.083</mass>
+      <com>
+        <coordinates>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>0.012</z>
+        </coordinates>
+      </com>
+      <inertia>
+        <Ixx>5.967E-5</Ixx>
+        <Ixy>-8.14E-8</Ixy>
+        <Ixz>1.308E-7</Ixz>
+        <Iyy>5.688E-5</Iyy>
+        <Iyz>-1.966E-6</Iyz>
+        <Izz>4.905E-5</Izz>
+      </inertia>
+      <graphics>
+        <x2D>
+          <position>
+            <x>-46.0</x>
+            <y>-33.0</y>
+          </position>
+          <name_pos>
+            <x>0.0</x>
+            <y>0.0</y>
+          </name_pos>
+          <shape>rectangle</shape>
+          <size>
+            <x>127.0</x>
+            <y>64.0</y>
+          </size>
+          <control_points>
+            <control_point>
+              <x>81.0</x>
+              <y>-33.0</y>
+            </control_point>
+            <control_point>
+              <x>81.0</x>
+              <y>31.0</y>
+            </control_point>
+            <control_point>
+              <x>-46.0</x>
+              <y>31.0</y>
+            </control_point>
+            <control_point>
+              <x>-46.0</x>
+              <y>-33.0</y>
+            </control_point>
+          </control_points>
+          <angle>0.0</angle>
+        </x2D>
+        <x3D>
+          <x3D_com />
+          <x3D_points />
+          <x3D_lines />
+        </x3D>
+      </graphics>
+    </body>
+    <body>
+      <bodyname>thigh_l</bodyname>
+      <parent>
+        <bodyname>Motor_l1</bodyname>
+        <pointname>origin</pointname>
+      </parent>
+      <joint>
+        <jointname>Joint_4</jointname>
+        <type>R2</type>
+        <nature>independent</nature>
+        <graphics>
+          <x2D>
+            <position>
+              <x>650.0</x>
+              <y>293.0</y>
+            </position>
+          </x2D>
+          <x3D>
+            <x3D_joint />
+            <x3D_frame />
+          </x3D>
+        </graphics>
+      </joint>
+      <mass>0.188</mass>
+      <com>
+        <coordinates>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>-0.088625</z>
+        </coordinates>
+      </com>
+      <inertia>
+        <Ixx>2.394E-4</Ixx>
+        <Iyy>2.394E-4</Iyy>
+        <Izz>7.867E-6</Izz>
+      </inertia>
+      <point>
+        <pointname>Point_0</pointname>
+        <coordinates>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>0.0</z>
+        </coordinates>
+        <graphics>
+          <x2D>
+            <position>
+              <x>660.0</x>
+              <y>335.0</y>
+            </position>
+          </x2D>
+          <x3D />
+        </graphics>
+      </point>
+      <graphics>
+        <x2D>
+          <position>
+            <x>-58.0</x>
+            <y>-15.0</y>
+          </position>
+          <name_pos>
+            <x>0.0</x>
+            <y>0.0</y>
+          </name_pos>
+          <shape>rectangle</shape>
+          <size>
+            <x>158.0</x>
+            <y>68.0</y>
+          </size>
+          <control_points>
+            <control_point>
+              <x>100.0</x>
+              <y>-15.0</y>
+            </control_point>
+            <control_point>
+              <x>100.0</x>
+              <y>53.0</y>
+            </control_point>
+            <control_point>
+              <x>-58.0</x>
+              <y>53.0</y>
+            </control_point>
+            <control_point>
+              <x>-58.0</x>
+              <y>-15.0</y>
+            </control_point>
+          </control_points>
+          <angle>0.0</angle>
+        </x2D>
+        <x3D>
+          <x3D_com />
+          <x3D_points />
+          <x3D_lines />
+        </x3D>
+      </graphics>
+    </body>
+    <body>
+      <bodyname>Motor_l2</bodyname>
+      <parent>
+        <bodyname>thigh_l</bodyname>
+        <pointname>Point_0</pointname>
+      </parent>
+      <joint>
+        <jointname>Joint_7</jointname>
+        <type>T3</type>
+        <nature>independent</nature>
+        <graphics>
+          <x2D>
+            <position>
+              <x>651.0</x>
+              <y>414.0</y>
+            </position>
+          </x2D>
+          <x3D>
+            <x3D_joint />
+            <x3D_frame />
+          </x3D>
+        </graphics>
+      </joint>
+      <mass>0.083</mass>
+      <com>
+        <coordinates>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>0.012</z>
+        </coordinates>
+      </com>
+      <inertia>
+        <Ixx>5.9855E-5</Ixx>
+        <Ixy>-7.4698E-8</Ixy>
+        <Ixz>1.208E-7</Ixz>
+        <Iyy>5.707E-5</Iyy>
+        <Iyz>-1.93E-6</Iyz>
+        <Izz>4.912E-5</Izz>
+      </inertia>
+      <graphics>
+        <x2D>
+          <position>
+            <x>-48.0</x>
+            <y>-20.0</y>
+          </position>
+          <name_pos>
+            <x>0.0</x>
+            <y>0.0</y>
+          </name_pos>
+          <shape>rectangle</shape>
+          <size>
+            <x>118.0</x>
+            <y>59.0</y>
+          </size>
+          <control_points>
+            <control_point>
+              <x>70.0</x>
+              <y>-20.0</y>
+            </control_point>
+            <control_point>
+              <x>70.0</x>
+              <y>39.0</y>
+            </control_point>
+            <control_point>
+              <x>-48.0</x>
+              <y>39.0</y>
+            </control_point>
+            <control_point>
+              <x>-48.0</x>
+              <y>-20.0</y>
+            </control_point>
+          </control_points>
+          <angle>0.0</angle>
+        </x2D>
+        <x3D>
+          <x3D_com />
+          <x3D_points />
+          <x3D_lines />
+        </x3D>
+      </graphics>
+    </body>
+    <body>
+      <bodyname>leg_l</bodyname>
+      <parent>
+        <bodyname>Motor_l2</bodyname>
+        <pointname>origin</pointname>
+      </parent>
+      <joint>
+        <jointname>Joint_8</jointname>
+        <type>R2</type>
+        <nature>independent</nature>
+        <graphics>
+          <x2D>
+            <position>
+              <x>658.0</x>
+              <y>488.0</y>
+            </position>
+          </x2D>
+          <x3D>
+            <x3D_joint />
+            <x3D_frame />
+          </x3D>
+        </graphics>
+      </joint>
+      <mass>0.1</mass>
+      <com>
+        <coordinates>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>-0.091625</z>
+        </coordinates>
+      </com>
+      <inertia>
+        <Ixx>2.1867E-4</Ixx>
+        <Iyy>2.1867E-4</Iyy>
+        <Izz>6.667E-6</Izz>
+      </inertia>
+      <point>
+        <pointname>Point_0</pointname>
+        <coordinates>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>0.0</z>
+        </coordinates>
+        <graphics>
+          <x2D>
+            <position>
+              <x>661.0</x>
+              <y>549.0</y>
+            </position>
+          </x2D>
+          <x3D />
+        </graphics>
+      </point>
+      <graphics>
+        <x2D>
+          <position>
+            <x>-57.0</x>
+            <y>0.0</y>
+          </position>
+          <name_pos>
+            <x>0.0</x>
+            <y>0.0</y>
+          </name_pos>
+          <shape>rectangle</shape>
+          <size>
+            <x>119.0</x>
+            <y>78.0</y>
+          </size>
+          <control_points>
+            <control_point>
+              <x>62.0</x>
+              <y>0.0</y>
+            </control_point>
+            <control_point>
+              <x>62.0</x>
+              <y>78.0</y>
+            </control_point>
+            <control_point>
+              <x>-57.0</x>
+              <y>78.0</y>
+            </control_point>
+            <control_point>
+              <x>-57.0</x>
+              <y>0.0</y>
+            </control_point>
+          </control_points>
+          <angle>0.0</angle>
+        </x2D>
+        <x3D>
+          <x3D_com />
+          <x3D_points />
+          <x3D_lines />
+        </x3D>
+      </graphics>
+    </body>
+    <body>
+      <bodyname>foot_l</bodyname>
+      <parent>
+        <bodyname>leg_l</bodyname>
+        <pointname>Point_0</pointname>
+      </parent>
+      <joint>
+        <jointname>Joint_11</jointname>
+        <type>R2</type>
+        <nature>independent</nature>
+        <graphics>
+          <x2D>
+            <position>
+              <x>640.0</x>
+              <y>616.0</y>
+            </position>
+          </x2D>
+          <x3D>
+            <x3D_joint />
+            <x3D_frame />
+          </x3D>
+        </graphics>
+      </joint>
+      <mass>0.041</mass>
+      <com>
+        <coordinates>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>-0.0045</z>
+        </coordinates>
+      </com>
+      <inertia>
+        <Ixx>5.7434E-6</Ixx>
+        <Iyy>1.7018E-5</Iyy>
+        <Izz>2.2208E-5</Izz>
+      </inertia>
+      <point>
+        <pointname>FS_ArG_l</pointname>
+        <coordinates>
+          <x>-0.035</x>
+          <y>-0.02</y>
+          <z>-0.009</z>
+        </coordinates>
+        <graphics>
+          <x2D>
+            <position>
+              <x>564.0</x>
+              <y>629.0</y>
+            </position>
+          </x2D>
+          <x3D />
+        </graphics>
+        <extforce name="ExtForce_0" Pos="true" Rot="true" Vit="true" Om="true" Acc="true" Omp="true">
+          <x3D>
+            <force show="true" showCompX="true" showCompY="true" showCompZ="true" showResultant="true" drawPosition="end">
+              <x_color R="255" G="0" B="0" />
+              <y_color R="0" G="255" B="0" />
+              <z_color R="0" G="0" B="255" />
+              <resultant_color R="0" G="0" B="0" />
+              <diameter>0.05</diameter>
+              <scale>1.0</scale>
+            </force>
+            <torque showCompX="true" showCompY="true" showCompZ="true" showResultant="true" drawPosition="end">
+              <x_color R="255" G="0" B="0" />
+              <y_color R="0" G="255" B="0" />
+              <z_color R="0" G="0" B="255" />
+              <resultant_color R="0" G="0" B="0" />
+              <diameter>0.1</diameter>
+              <scale>1.0</scale>
+            </torque>
+          </x3D>
+        </extforce>
+      </point>
+      <point>
+        <pointname>FS_ArD_l</pointname>
+        <coordinates>
+          <x>-0.035</x>
+          <y>0.02</y>
+          <z>-0.009</z>
+        </coordinates>
+        <graphics>
+          <x2D>
+            <position>
+              <x>561.0</x>
+              <y>698.0</y>
+            </position>
+          </x2D>
+          <x3D />
+        </graphics>
+        <extforce name="ExtForce_1" Pos="true" Rot="true" Vit="true" Om="true" Acc="true" Omp="true">
+          <x3D>
+            <force show="true" showCompX="true" showCompY="true" showCompZ="true" showResultant="true" drawPosition="end">
+              <x_color R="255" G="0" B="0" />
+              <y_color R="0" G="255" B="0" />
+              <z_color R="0" G="0" B="255" />
+              <resultant_color R="0" G="0" B="0" />
+              <diameter>0.05</diameter>
+              <scale>1.0</scale>
+            </force>
+            <torque showCompX="true" showCompY="true" showCompZ="true" showResultant="true" drawPosition="end">
+              <x_color R="255" G="0" B="0" />
+              <y_color R="0" G="255" B="0" />
+              <z_color R="0" G="0" B="255" />
+              <resultant_color R="0" G="0" B="0" />
+              <diameter>0.1</diameter>
+              <scale>1.0</scale>
+            </torque>
+          </x3D>
+        </extforce>
+      </point>
+      <point>
+        <pointname>FS_M_l</pointname>
+        <coordinates>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>-0.009</z>
+        </coordinates>
+        <graphics>
+          <x2D>
+            <position>
+              <x>638.0</x>
+              <y>674.0</y>
+            </position>
+          </x2D>
+          <x3D />
+        </graphics>
+        <extforce name="ExtForce_2" Pos="true" Rot="true" Vit="true" Om="true" Acc="true" Omp="true">
+          <x3D>
+            <force show="true" showCompX="true" showCompY="true" showCompZ="true" showResultant="true" drawPosition="end">
+              <x_color R="255" G="0" B="0" />
+              <y_color R="0" G="255" B="0" />
+              <z_color R="0" G="0" B="255" />
+              <resultant_color R="0" G="0" B="0" />
+              <diameter>0.05</diameter>
+              <scale>1.0</scale>
+            </force>
+            <torque showCompX="true" showCompY="true" showCompZ="true" showResultant="true" drawPosition="end">
+              <x_color R="255" G="0" B="0" />
+              <y_color R="0" G="255" B="0" />
+              <z_color R="0" G="0" B="255" />
+              <resultant_color R="0" G="0" B="0" />
+              <diameter>0.1</diameter>
+              <scale>1.0</scale>
+            </torque>
+          </x3D>
+        </extforce>
+      </point>
+      <point>
+        <pointname>FS_AvG_l</pointname>
+        <coordinates>
+          <x>0.035</x>
+          <y>-0.02</y>
+          <z>-0.009</z>
+        </coordinates>
+        <graphics>
+          <x2D>
+            <position>
+              <x>714.0</x>
+              <y>641.0</y>
+            </position>
+          </x2D>
+          <x3D />
+        </graphics>
+        <extforce name="ExtForce_3" Pos="true" Rot="true" Vit="true" Om="true" Acc="true" Omp="true">
+          <x3D>
+            <force show="true" showCompX="true" showCompY="true" showCompZ="true" showResultant="true" drawPosition="end">
+              <x_color R="255" G="0" B="0" />
+              <y_color R="0" G="255" B="0" />
+              <z_color R="0" G="0" B="255" />
+              <resultant_color R="0" G="0" B="0" />
+              <diameter>0.05</diameter>
+              <scale>1.0</scale>
+            </force>
+            <torque showCompX="true" showCompY="true" showCompZ="true" showResultant="true" drawPosition="end">
+              <x_color R="255" G="0" B="0" />
+              <y_color R="0" G="255" B="0" />
+              <z_color R="0" G="0" B="255" />
+              <resultant_color R="0" G="0" B="0" />
+              <diameter>0.1</diameter>
+              <scale>1.0</scale>
+            </torque>
+          </x3D>
+        </extforce>
+      </point>
+      <point>
+        <pointname>FS_AvD_l</pointname>
+        <coordinates>
+          <x>0.035</x>
+          <y>0.02</y>
+          <z>-0.009</z>
+        </coordinates>
+        <graphics>
+          <x2D>
+            <position>
+              <x>702.0</x>
+              <y>690.0</y>
+            </position>
+          </x2D>
+          <x3D />
+        </graphics>
+        <extforce name="ExtForce_4" Pos="true" Rot="true" Vit="true" Om="true" Acc="true" Omp="true">
+          <x3D>
+            <force show="true" showCompX="true" showCompY="true" showCompZ="true" showResultant="true" drawPosition="end">
+              <x_color R="255" G="0" B="0" />
+              <y_color R="0" G="255" B="0" />
+              <z_color R="0" G="0" B="255" />
+              <resultant_color R="0" G="0" B="0" />
+              <diameter>0.05</diameter>
+              <scale>1.0</scale>
+            </force>
+            <torque showCompX="true" showCompY="true" showCompZ="true" showResultant="true" drawPosition="end">
+              <x_color R="255" G="0" B="0" />
+              <y_color R="0" G="255" B="0" />
+              <z_color R="0" G="0" B="255" />
+              <resultant_color R="0" G="0" B="0" />
+              <diameter>0.1</diameter>
+              <scale>1.0</scale>
+            </torque>
+          </x3D>
+        </extforce>
+      </point>
+      <graphics>
+        <x2D>
+          <position>
+            <x>-88.0</x>
+            <y>-4.0</y>
+          </position>
+          <name_pos>
+            <x>0.0</x>
+            <y>0.0</y>
+          </name_pos>
+          <shape>rectangle</shape>
+          <size>
+            <x>175.0</x>
+            <y>99.0</y>
+          </size>
+          <control_points>
+            <control_point>
+              <x>87.0</x>
+              <y>-4.0</y>
+            </control_point>
+            <control_point>
+              <x>87.0</x>
+              <y>95.0</y>
+            </control_point>
+            <control_point>
+              <x>-88.0</x>
+              <y>95.0</y>
+            </control_point>
+            <control_point>
+              <x>-88.0</x>
+              <y>-4.0</y>
+            </control_point>
+          </control_points>
+          <angle>0.0</angle>
+        </x2D>
+        <x3D>
+          <x3D_com />
+          <x3D_points />
+          <x3D_lines />
+        </x3D>
+      </graphics>
+    </body>
+    <body>
+      <bodyname>Motor_r1</bodyname>
+      <parent>
+        <bodyname>hip</bodyname>
+        <pointname>Point_1</pointname>
+      </parent>
+      <joint>
+        <jointname>Joint_5</jointname>
+        <type>T3</type>
+        <nature>independent</nature>
+        <graphics>
+          <x2D>
+            <position>
+              <x>1195.0</x>
+              <y>199.0</y>
+            </position>
+          </x2D>
+          <x3D>
+            <x3D_joint />
+            <x3D_frame />
+          </x3D>
+        </graphics>
+      </joint>
+      <mass>0.083</mass>
+      <com>
+        <coordinates>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>0.012</z>
+        </coordinates>
+      </com>
+      <inertia>
+        <Ixx>5.967E-5</Ixx>
+        <Ixy>-8.14E-8</Ixy>
+        <Ixz>1.308E-7</Ixz>
+        <Iyy>5.688E-5</Iyy>
+        <Iyz>-1.966E-6</Iyz>
+        <Izz>4.905E-5</Izz>
+      </inertia>
+      <graphics>
+        <x2D>
+          <position>
+            <x>-16.0</x>
+            <y>-18.0</y>
+          </position>
+          <name_pos>
+            <x>0.0</x>
+            <y>0.0</y>
+          </name_pos>
+          <shape>rectangle</shape>
+          <size>
+            <x>121.0</x>
+            <y>56.0</y>
+          </size>
+          <control_points>
+            <control_point>
+              <x>105.0</x>
+              <y>-18.0</y>
+            </control_point>
+            <control_point>
+              <x>105.0</x>
+              <y>38.0</y>
+            </control_point>
+            <control_point>
+              <x>-16.0</x>
+              <y>38.0</y>
+            </control_point>
+            <control_point>
+              <x>-16.0</x>
+              <y>-18.0</y>
+            </control_point>
+          </control_points>
+          <angle>0.0</angle>
+        </x2D>
+        <x3D>
+          <x3D_com />
+          <x3D_points />
+          <x3D_lines />
+        </x3D>
+      </graphics>
+    </body>
+    <body>
+      <bodyname>thigh_r</bodyname>
+      <parent>
+        <bodyname>Motor_r1</bodyname>
+        <pointname>origin</pointname>
+      </parent>
+      <joint>
+        <jointname>Joint_6</jointname>
+        <type>R2</type>
+        <nature>independent</nature>
+        <graphics>
+          <x2D>
+            <position>
+              <x>1191.0</x>
+              <y>280.0</y>
+            </position>
+          </x2D>
+          <x3D>
+            <x3D_joint />
+            <x3D_frame />
+          </x3D>
+        </graphics>
+      </joint>
+      <mass>0.188</mass>
+      <com>
+        <coordinates>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>-0.088625</z>
+        </coordinates>
+      </com>
+      <inertia>
+        <Ixx>2.394E-4</Ixx>
+        <Iyy>2.394E-4</Iyy>
+        <Izz>7.867E-6</Izz>
+      </inertia>
+      <point>
+        <pointname>Point_0</pointname>
+        <coordinates>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>0.0</z>
+        </coordinates>
+        <graphics>
+          <x2D>
+            <position>
+              <x>1189.0</x>
+              <y>330.0</y>
+            </position>
+          </x2D>
+          <x3D />
+        </graphics>
+      </point>
+      <graphics>
+        <x2D>
+          <position>
+            <x>-66.0</x>
+            <y>-17.0</y>
+          </position>
+          <name_pos>
+            <x>0.0</x>
+            <y>0.0</y>
+          </name_pos>
+          <shape>rectangle</shape>
+          <size>
+            <x>178.0</x>
+            <y>83.0</y>
+          </size>
+          <control_points>
+            <control_point>
+              <x>112.0</x>
+              <y>-17.0</y>
+            </control_point>
+            <control_point>
+              <x>112.0</x>
+              <y>66.0</y>
+            </control_point>
+            <control_point>
+              <x>-66.0</x>
+              <y>66.0</y>
+            </control_point>
+            <control_point>
+              <x>-66.0</x>
+              <y>-17.0</y>
+            </control_point>
+          </control_points>
+          <angle>0.0</angle>
+        </x2D>
+        <x3D>
+          <x3D_com />
+          <x3D_points />
+          <x3D_lines />
+        </x3D>
+      </graphics>
+    </body>
+    <body>
+      <bodyname>Motor_r2</bodyname>
+      <parent>
+        <bodyname>thigh_r</bodyname>
+        <pointname>Point_0</pointname>
+      </parent>
+      <joint>
+        <jointname>Joint_9</jointname>
+        <type>T3</type>
+        <nature>independent</nature>
+        <graphics>
+          <x2D>
+            <position>
+              <x>1182.0</x>
+              <y>399.0</y>
+            </position>
+          </x2D>
+          <x3D>
+            <x3D_joint />
+            <x3D_frame />
+          </x3D>
+        </graphics>
+      </joint>
+      <mass>0.083</mass>
+      <com>
+        <coordinates>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>0.012</z>
+        </coordinates>
+      </com>
+      <inertia>
+        <Ixx>5.9855E-5</Ixx>
+        <Ixy>-7.4698E-8</Ixy>
+        <Ixz>1.208E-7</Ixz>
+        <Iyy>5.707E-5</Iyy>
+        <Iyz>-1.93E-6</Iyz>
+        <Izz>4.912E-5</Izz>
+      </inertia>
+      <graphics>
+        <x2D>
+          <position>
+            <x>-46.0</x>
+            <y>-19.0</y>
+          </position>
+          <name_pos>
+            <x>0.0</x>
+            <y>0.0</y>
+          </name_pos>
+          <shape>rectangle</shape>
+          <size>
+            <x>111.0</x>
+            <y>48.0</y>
+          </size>
+          <control_points>
+            <control_point>
+              <x>65.0</x>
+              <y>-19.0</y>
+            </control_point>
+            <control_point>
+              <x>65.0</x>
+              <y>29.0</y>
+            </control_point>
+            <control_point>
+              <x>-46.0</x>
+              <y>29.0</y>
+            </control_point>
+            <control_point>
+              <x>-46.0</x>
+              <y>-19.0</y>
+            </control_point>
+          </control_points>
+          <angle>0.0</angle>
+        </x2D>
+        <x3D>
+          <x3D_com />
+          <x3D_points />
+          <x3D_lines />
+        </x3D>
+      </graphics>
+    </body>
+    <body>
+      <bodyname>leg_r</bodyname>
+      <parent>
+        <bodyname>Motor_r2</bodyname>
+        <pointname>origin</pointname>
+      </parent>
+      <joint>
+        <jointname>Joint_10</jointname>
+        <type>R2</type>
+        <nature>independent</nature>
+        <graphics>
+          <x2D>
+            <position>
+              <x>1184.0</x>
+              <y>487.0</y>
+            </position>
+          </x2D>
+          <x3D>
+            <x3D_joint />
+            <x3D_frame />
+          </x3D>
+        </graphics>
+      </joint>
+      <mass>0.1</mass>
+      <com>
+        <coordinates>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>-0.091625</z>
+        </coordinates>
+      </com>
+      <inertia>
+        <Ixx>2.1867E-4</Ixx>
+        <Iyy>2.1867E-4</Iyy>
+        <Izz>6.667E-6</Izz>
+      </inertia>
+      <point>
+        <pointname>Point_0</pointname>
+        <coordinates>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>0.0</z>
+        </coordinates>
+        <graphics>
+          <x2D>
+            <position>
+              <x>1208.0</x>
+              <y>545.0</y>
+            </position>
+          </x2D>
+          <x3D />
+        </graphics>
+      </point>
+      <graphics>
+        <x2D>
+          <position>
+            <x>-43.0</x>
+            <y>-13.0</y>
+          </position>
+          <name_pos>
+            <x>0.0</x>
+            <y>0.0</y>
+          </name_pos>
+          <shape>rectangle</shape>
+          <size>
+            <x>119.0</x>
+            <y>79.0</y>
+          </size>
+          <control_points>
+            <control_point>
+              <x>76.0</x>
+              <y>-13.0</y>
+            </control_point>
+            <control_point>
+              <x>76.0</x>
+              <y>66.0</y>
+            </control_point>
+            <control_point>
+              <x>-43.0</x>
+              <y>66.0</y>
+            </control_point>
+            <control_point>
+              <x>-43.0</x>
+              <y>-13.0</y>
+            </control_point>
+          </control_points>
+          <angle>0.0</angle>
+        </x2D>
+        <x3D>
+          <x3D_com />
+          <x3D_points />
+          <x3D_lines />
+        </x3D>
+      </graphics>
+    </body>
+    <body>
+      <bodyname>foot_r</bodyname>
+      <parent>
+        <bodyname>leg_r</bodyname>
+        <pointname>Point_0</pointname>
+      </parent>
+      <joint>
+        <jointname>Joint_12</jointname>
+        <type>R2</type>
+        <nature>independent</nature>
+        <graphics>
+          <x2D>
+            <position>
+              <x>1213.0</x>
+              <y>626.0</y>
+            </position>
+          </x2D>
+          <x3D>
+            <x3D_joint />
+            <x3D_frame />
+          </x3D>
+        </graphics>
+      </joint>
+      <mass>0.041</mass>
+      <com>
+        <coordinates>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>-0.0045</z>
+        </coordinates>
+      </com>
+      <inertia>
+        <Ixx>5.7434E-6</Ixx>
+        <Iyy>1.7018E-5</Iyy>
+        <Izz>2.2208E-5</Izz>
+      </inertia>
+      <point>
+        <pointname>FS_ArG_r</pointname>
+        <coordinates>
+          <x>-0.035</x>
+          <y>-0.02</y>
+          <z>-0.009</z>
+        </coordinates>
+        <graphics>
+          <x2D>
+            <position>
+              <x>1148.0</x>
+              <y>624.0</y>
+            </position>
+          </x2D>
+          <x3D />
+        </graphics>
+        <extforce name="ExtForce_5" Pos="true" Rot="true" Vit="true" Om="true" Acc="true" Omp="true">
+          <x3D>
+            <force show="true" showCompX="true" showCompY="true" showCompZ="true" showResultant="true" drawPosition="end">
+              <x_color R="255" G="0" B="0" />
+              <y_color R="0" G="255" B="0" />
+              <z_color R="0" G="0" B="255" />
+              <resultant_color R="0" G="0" B="0" />
+              <diameter>0.05</diameter>
+              <scale>1.0</scale>
+            </force>
+            <torque showCompX="true" showCompY="true" showCompZ="true" showResultant="true" drawPosition="end">
+              <x_color R="255" G="0" B="0" />
+              <y_color R="0" G="255" B="0" />
+              <z_color R="0" G="0" B="255" />
+              <resultant_color R="0" G="0" B="0" />
+              <diameter>0.1</diameter>
+              <scale>1.0</scale>
+            </torque>
+          </x3D>
+        </extforce>
+      </point>
+      <point>
+        <pointname>FS_ArD_r</pointname>
+        <coordinates>
+          <x>-0.035</x>
+          <y>0.02</y>
+          <z>-0.009</z>
+        </coordinates>
+        <graphics>
+          <x2D>
+            <position>
+              <x>1142.0</x>
+              <y>685.0</y>
+            </position>
+          </x2D>
+          <x3D />
+        </graphics>
+        <extforce name="ExtForce_6" Pos="true" Rot="true" Vit="true" Om="true" Acc="true" Omp="true">
+          <x3D>
+            <force show="true" showCompX="true" showCompY="true" showCompZ="true" showResultant="true" drawPosition="end">
+              <x_color R="255" G="0" B="0" />
+              <y_color R="0" G="255" B="0" />
+              <z_color R="0" G="0" B="255" />
+              <resultant_color R="0" G="0" B="0" />
+              <diameter>0.05</diameter>
+              <scale>1.0</scale>
+            </force>
+            <torque showCompX="true" showCompY="true" showCompZ="true" showResultant="true" drawPosition="end">
+              <x_color R="255" G="0" B="0" />
+              <y_color R="0" G="255" B="0" />
+              <z_color R="0" G="0" B="255" />
+              <resultant_color R="0" G="0" B="0" />
+              <diameter>0.1</diameter>
+              <scale>1.0</scale>
+            </torque>
+          </x3D>
+        </extforce>
+      </point>
+      <point>
+        <pointname>FS_M_r</pointname>
+        <coordinates>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>-0.009</z>
+        </coordinates>
+        <graphics>
+          <x2D>
+            <position>
+              <x>1225.0</x>
+              <y>669.0</y>
+            </position>
+          </x2D>
+          <x3D />
+        </graphics>
+        <extforce name="ExtForce_7" Pos="true" Rot="true" Vit="true" Om="true" Acc="true" Omp="true">
+          <x3D>
+            <force show="true" showCompX="true" showCompY="true" showCompZ="true" showResultant="true" drawPosition="end">
+              <x_color R="255" G="0" B="0" />
+              <y_color R="0" G="255" B="0" />
+              <z_color R="0" G="0" B="255" />
+              <resultant_color R="0" G="0" B="0" />
+              <diameter>0.05</diameter>
+              <scale>1.0</scale>
+            </force>
+            <torque showCompX="true" showCompY="true" showCompZ="true" showResultant="true" drawPosition="end">
+              <x_color R="255" G="0" B="0" />
+              <y_color R="0" G="255" B="0" />
+              <z_color R="0" G="0" B="255" />
+              <resultant_color R="0" G="0" B="0" />
+              <diameter>0.1</diameter>
+              <scale>1.0</scale>
+            </torque>
+          </x3D>
+        </extforce>
+      </point>
+      <point>
+        <pointname>FS_AvG_r</pointname>
+        <coordinates>
+          <x>0.035</x>
+          <y>-0.02</y>
+          <z>-0.009</z>
+        </coordinates>
+        <graphics>
+          <x2D>
+            <position>
+              <x>1302.0</x>
+              <y>626.0</y>
+            </position>
+          </x2D>
+          <x3D />
+        </graphics>
+        <extforce name="ExtForce_9" Pos="true" Rot="true" Vit="true" Om="true" Acc="true" Omp="true">
+          <x3D>
+            <force show="true" showCompX="true" showCompY="true" showCompZ="true" showResultant="true" drawPosition="end">
+              <x_color R="255" G="0" B="0" />
+              <y_color R="0" G="255" B="0" />
+              <z_color R="0" G="0" B="255" />
+              <resultant_color R="0" G="0" B="0" />
+              <diameter>0.05</diameter>
+              <scale>1.0</scale>
+            </force>
+            <torque showCompX="true" showCompY="true" showCompZ="true" showResultant="true" drawPosition="end">
+              <x_color R="255" G="0" B="0" />
+              <y_color R="0" G="255" B="0" />
+              <z_color R="0" G="0" B="255" />
+              <resultant_color R="0" G="0" B="0" />
+              <diameter>0.1</diameter>
+              <scale>1.0</scale>
+            </torque>
+          </x3D>
+        </extforce>
+      </point>
+      <point>
+        <pointname>FS_AvD_r</pointname>
+        <coordinates>
+          <x>0.035</x>
+          <y>0.02</y>
+          <z>-0.009</z>
+        </coordinates>
+        <graphics>
+          <x2D>
+            <position>
+              <x>1308.0</x>
+              <y>690.0</y>
+            </position>
+          </x2D>
+          <x3D />
+        </graphics>
+        <extforce name="ExtForce_8" Pos="true" Rot="true" Vit="true" Om="true" Acc="true" Omp="true">
+          <x3D>
+            <force show="true" showCompX="true" showCompY="true" showCompZ="true" showResultant="true" drawPosition="end">
+              <x_color R="255" G="0" B="0" />
+              <y_color R="0" G="255" B="0" />
+              <z_color R="0" G="0" B="255" />
+              <resultant_color R="0" G="0" B="0" />
+              <diameter>0.05</diameter>
+              <scale>1.0</scale>
+            </force>
+            <torque showCompX="true" showCompY="true" showCompZ="true" showResultant="true" drawPosition="end">
+              <x_color R="255" G="0" B="0" />
+              <y_color R="0" G="255" B="0" />
+              <z_color R="0" G="0" B="255" />
+              <resultant_color R="0" G="0" B="0" />
+              <diameter>0.1</diameter>
+              <scale>1.0</scale>
+            </torque>
+          </x3D>
+        </extforce>
+      </point>
+      <graphics>
+        <x2D>
+          <position>
+            <x>-85.0</x>
+            <y>-18.0</y>
+          </position>
+          <name_pos>
+            <x>0.0</x>
+            <y>0.0</y>
+          </name_pos>
+          <shape>rectangle</shape>
+          <size>
+            <x>194.0</x>
+            <y>92.0</y>
+          </size>
+          <control_points>
+            <control_point>
+              <x>109.0</x>
+              <y>-18.0</y>
+            </control_point>
+            <control_point>
+              <x>109.0</x>
+              <y>74.0</y>
+            </control_point>
+            <control_point>
+              <x>-85.0</x>
+              <y>74.0</y>
+            </control_point>
+            <control_point>
+              <x>-85.0</x>
+              <y>-18.0</y>
+            </control_point>
+          </control_points>
+          <angle>0.0</angle>
+        </x2D>
+        <x3D>
+          <x3D_com />
+          <x3D_points />
+          <x3D_lines />
+        </x3D>
+      </graphics>
+    </body>
+  </bodytree>
+  <x3D>
+    <background>
+      <!--This is the background properties-->
+      <color R="51" G="102" B="204" />
+    </background>
+    <shapeScaleFactors>
+      <!--This is the scale factors-->
+      <frame>0.2</frame>
+      <joint>0.3</joint>
+      <com>0.3</com>
+      <point>0.3</point>
+    </shapeScaleFactors>
+    <opengl>
+      <lightAndShadowMode>LIGHTS_NO_SPEC_SHADER</lightAndShadowMode>
+      <glfwSample>4</glfwSample>
+    </opengl>
+    <lights>
+      <!--This is the light list-->
+      <directionalLight>
+        <name>DefaultLight01</name>
+        <joint>base</joint>
+        <color R="255" G="255" B="255" />
+        <ambient>0.05</ambient>
+        <depthXWidth>1024.0</depthXWidth>
+        <depthYWidth>1024.0</depthYWidth>
+        <depthNear>-10.0</depthNear>
+        <depthFar>20.0</depthFar>
+        <shadowBias>0.0</shadowBias>
+        <zUpVector>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>1.0</z>
+        </zUpVector>
+        <active />
+        <direction>
+          <x>2.0</x>
+          <y>1.0</y>
+          <z>1.0</z>
+        </direction>
+        <depthScale>0.0015</depthScale>
+        <relPointVector>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>0.0</z>
+        </relPointVector>
+      </directionalLight>
+      <directionalLight>
+        <name>DefaultLight02</name>
+        <joint>base</joint>
+        <color R="255" G="255" B="255" />
+        <ambient>0.05</ambient>
+        <depthXWidth>1024.0</depthXWidth>
+        <depthYWidth>1024.0</depthYWidth>
+        <depthNear>-10.0</depthNear>
+        <depthFar>20.0</depthFar>
+        <shadowBias>0.0</shadowBias>
+        <zUpVector>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>1.0</z>
+        </zUpVector>
+        <active />
+        <direction>
+          <x>-1.0</x>
+          <y>-2.0</y>
+          <z>-1.0</z>
+        </direction>
+        <depthScale>0.0015</depthScale>
+        <relPointVector>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>0.0</z>
+        </relPointVector>
+      </directionalLight>
+      <directionalLight>
+        <name>DefaultLight03</name>
+        <joint>base</joint>
+        <color R="255" G="255" B="255" />
+        <ambient>0.05</ambient>
+        <depthXWidth>1024.0</depthXWidth>
+        <depthYWidth>1024.0</depthYWidth>
+        <depthNear>-10.0</depthNear>
+        <depthFar>20.0</depthFar>
+        <shadowBias>0.0</shadowBias>
+        <zUpVector>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>1.0</z>
+        </zUpVector>
+        <active />
+        <direction>
+          <x>1.0</x>
+          <y>-1.0</y>
+          <z>-2.0</z>
+        </direction>
+        <depthScale>0.0015</depthScale>
+        <relPointVector>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>0.0</z>
+        </relPointVector>
+      </directionalLight>
+      <directionalLight>
+        <name>DefaultLight04</name>
+        <joint>base</joint>
+        <color R="255" G="255" B="255" />
+        <ambient>0.05</ambient>
+        <depthXWidth>1024.0</depthXWidth>
+        <depthYWidth>1024.0</depthYWidth>
+        <depthNear>-10.0</depthNear>
+        <depthFar>20.0</depthFar>
+        <shadowBias>0.0</shadowBias>
+        <zUpVector>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>1.0</z>
+        </zUpVector>
+        <active />
+        <direction>
+          <x>-1.0</x>
+          <y>2.0</y>
+          <z>1.0</z>
+        </direction>
+        <depthScale>0.0015</depthScale>
+        <relPointVector>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>0.0</z>
+        </relPointVector>
+      </directionalLight>
+    </lights>
+  </x3D>
+</mbsDescR7>
+
