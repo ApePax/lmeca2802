@@ -58,15 +58,7 @@ def user_JointForces(mbs_data, tsim):
     Nominal_voltage = 12.0
     PWM = (q_ref - q_motors) * (4095.0 / (2 * np.pi) * Kp)
     PWM_sat = np.clip(PWM, -PWM_goal, PWM_goal)
-    
     u = PWM_sat * (Nominal_voltage / PWM_goal)
-    """   
-    if reference_trajectory.i < 1000:
-        reference_trajectory.i += 1
-        if reference_trajectory.i%100 == 1:
-            print(PWM)
-            print(u)
-    """
     mbs_data.Voltages = u
     ### Motor Equations ###
     HGR = 353.5             # Hip gear-ratio
