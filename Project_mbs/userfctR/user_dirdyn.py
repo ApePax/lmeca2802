@@ -30,6 +30,8 @@ def user_dirdyn_init(mbs_data, mbs_dirdyn):
     # mbs_data.my_sensor_v = []
     
     #mbs_data.define_input_vector("../Walking_Patterns/WP.csv")
+    mbs_data.define_output_vector("Force_Sensors",40)
+    mbs_data.define_output_vector("Voltages",4)
 
     return
 
@@ -57,7 +59,8 @@ def user_dirdyn_loop(mbs_data, mbs_dirdyn):
     #
     # mbs_data.my_sensor.comp_s_sensor(1)
     # mbs_data.my_sensor_v.append(mbs_data.my_sensor.V[3])
-
+    mbs_data.set_output_vector(mbs_data.Force_Sensors,"Force_Sensors")
+    mbs_data.set_output_vector(mbs_data.Voltages,"Voltages")
     return
 
 

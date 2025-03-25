@@ -14,11 +14,13 @@ class Contact_Manager:
             Contact_PxF : Positions of the contact points for each sensor
             Previous_PxF : Previous position of the sensor
             InContact : Status of the sensor { 0: no contact, 1: contact }
+            results : Force outputs on each sensor [ixF,Fx,Fy,Fz] for ixF
         """
         self.nSensors = nSensors
         self.Contact_PxF  = np.full((nSensors, 4), np.nan)
         self.Previous_PxF = np.full((nSensors, 4), np.nan)
         self.InContact    = np.zeros(nSensors, dtype=int)
+        self.results      = np.zeros(4*nSensors)
         return 
     
     def update_contact(self, ixF, PxF):
@@ -191,9 +193,12 @@ class ViscoelasticCoulombModel:
 # Normal Model Choice 0: Hunt-Crossley-Hertz, 1: Viscoelastic Coulomb
 Model = 0
 # Instantiate a Hunt-Crossley-Hertz friction model
-k = 5e4       # Stiffness coefficient
+# lambda = 3/2 * k * alpha = k * d => d = 3/2 *alpha
+# Xing [5e4 , 1.5 , 0.3]
+# Brieuc [1e4, 1.5, 3.3]
+k = 1e4       # Stiffness coefficient
 n = 1.5       # Nonlinearity exponent (3/2 for Hertzian contact)
-d = 0.1       # Damping coefficient
+d = 3.3       # Damping coefficient
 hch_model = HuntCrossleyHertz(k, n, d)
 
 # Instantiate a ViscoElastic Coulomb model
@@ -298,5 +303,7 @@ def user_ExtForces(PxF, RxF, VxF, OMxF, AxF, OMPxF, mbs_data, tsim, ixF):
     # This must not be modified.
     Swr = mbs_data.SWr[ixF]
     Swr[1:] = [Fx, Fy, Fz, Mx, My, Mz, dxF[0], dxF[1], dxF[2]]
+    cm.results[4*ixF : 4*(ixF +1)] = np.array([ixF,Fx,Fy,Fz])
+    if(ixF == 10): mbs_data.Force_Sensors = cm.results[4:]
 
     return Swr

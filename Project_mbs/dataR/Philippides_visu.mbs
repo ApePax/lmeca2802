@@ -1937,6 +1937,57 @@
       <lightAndShadowMode>LIGHTS_NO_SPEC_SHADER</lightAndShadowMode>
       <glfwSample>4</glfwSample>
     </opengl>
+    <viewpoints>
+      <!--This is the viewpoint list-->
+      <viewpoint>
+        <name>Side view</name>
+        <joint>R_hip</joint>
+        <position>
+          <x>0.0</x>
+          <y>1.0</y>
+          <z>0.0</z>
+        </position>
+        <target>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>0.0</z>
+        </target>
+        <up>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>1.0</z>
+        </up>
+        <projection>perspective</projection>
+        <scale>1.0</scale>
+        <fieldOfView>1.5</fieldOfView>
+        <frontClipDst>0.01</frontClipDst>
+        <backClipDst>50.0</backClipDst>
+      </viewpoint>
+      <viewpoint>
+        <name>Global view</name>
+        <joint>T_lh_fixed</joint>
+        <position>
+          <x>1.5</x>
+          <y>1.0</y>
+          <z>0.5</z>
+        </position>
+        <target>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>0.0</z>
+        </target>
+        <up>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>1.0</z>
+        </up>
+        <projection>perspective</projection>
+        <scale>1.0</scale>
+        <fieldOfView>0.785</fieldOfView>
+        <frontClipDst>0.01</frontClipDst>
+        <backClipDst>50.0</backClipDst>
+      </viewpoint>
+    </viewpoints>
     <lights>
       <!--This is the light list-->
       <directionalLight>
