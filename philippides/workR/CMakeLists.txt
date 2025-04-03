@@ -23,7 +23,7 @@ project (philippides)
 # message to display the project name
 message(STATUS "Processing ${PROJECT_NAME}")
 
-find_package(mbsysc 1.26 COMPONENTS module load utilities numerics realtime)
+find_package(mbsysc 1.28 COMPONENTS module load utilities numerics realtime)
 # Error message if mbsysc is not found, it is required ! 
 if(NOT EXISTS ${MBSYSC_DIRECTORY})
     message("The given path to MBsysC install directory was not found for this project.\n")

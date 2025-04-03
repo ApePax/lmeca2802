@@ -1,0 +1,9 @@
+/home/apepax/.robotran/lmeca2802/philippides/workR/build/CMakeFiles/install/strip.dir
+/home/apepax/.robotran/lmeca2802/philippides/workR/build/CMakeFiles/install/local.dir
+/home/apepax/.robotran/lmeca2802/philippides/workR/build/CMakeFiles/exe_philippides.dir
+/home/apepax/.robotran/lmeca2802/philippides/workR/build/CMakeFiles/edit_cache.dir
+/home/apepax/.robotran/lmeca2802/philippides/workR/build/CMakeFiles/Project_symbolic.dir
+/home/apepax/.robotran/lmeca2802/philippides/workR/build/CMakeFiles/install.dir
+/home/apepax/.robotran/lmeca2802/philippides/workR/build/CMakeFiles/list_install_components.dir
+/home/apepax/.robotran/lmeca2802/philippides/workR/build/CMakeFiles/rebuild_cache.dir
+/home/apepax/.robotran/lmeca2802/philippides/workR/build/CMakeFiles/Project_user.dir
