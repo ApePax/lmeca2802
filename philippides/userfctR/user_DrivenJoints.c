@@ -18,7 +18,7 @@ void user_DrivenJoints(MbsData *mbs_data,double tsim)
         mbs_data->joint_id[T_lh_fixed],
         mbs_data->joint_id[T_rh_fixed],
         mbs_data->joint_id[T_lk_fixed],
-        mbs_data->joint_id[T_lk_fixed], // probable duplication
+        mbs_data->joint_id[T_rk_fixed], 
         mbs_data->joint_id[R_hip]
     };
 

@@ -24,7 +24,7 @@ def user_DrivenJoints(mbs_data, tsim):
     # The rotation of the hip is kept locked for the moment
 
     fixed_translations_ids = [mbs_data.joint_id["T_lh_fixed"], mbs_data.joint_id["T_rh_fixed"],
-                              mbs_data.joint_id["T_lk_fixed"],mbs_data.joint_id["T_lk_fixed"],mbs_data.joint_id["R_hip"] ]
+                              mbs_data.joint_id["T_lk_fixed"],mbs_data.joint_id["T_rk_fixed"],mbs_data.joint_id["R_hip"] ]
     for elem in fixed_translations_ids:
         mbs_data.q[elem]    = 0
         mbs_data.qd[elem]   = 0
