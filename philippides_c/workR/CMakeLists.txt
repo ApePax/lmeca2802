@@ -20,7 +20,7 @@ cmake_minimum_required(VERSION 3.11)
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
 # project name
-project (philippides)
+project (philippides_c)
 
 # message to display the project name
 message(STATUS "Processing ${PROJECT_NAME}")

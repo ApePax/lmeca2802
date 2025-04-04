@@ -38,7 +38,7 @@
 
 int main(int argc, char const *argv[])
 {
-    mbs_msg("Starting philippides_c MBS project!\n");
+    mbs_msg("Starting philippides MBS project!\n");
 
     
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -46,8 +46,8 @@ int main(int argc, char const *argv[])
      * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
     MbsData *mbs_data;
 
-    mbs_msg("Loading the philippides_c data file !\n");
-    mbs_data = mbs_load("philippides_c.mbs");
+    mbs_msg("Loading the philippides data file !\n");
+    mbs_data = mbs_load("philippides.mbs");
     mbs_msg("*.mbs file loaded!\n");
     
     
@@ -70,6 +70,7 @@ int main(int argc, char const *argv[])
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
      *                    EQUILIBRIUM                            *
      * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+    /*
     MbsEquil *mbs_equil;
     mbs_data->process = 2;
 
@@ -83,11 +84,12 @@ int main(int argc, char const *argv[])
     mbs_run_equil(mbs_equil, mbs_data);
 
     mbs_delete_equil(mbs_equil, mbs_data);
-    
+    */
     
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
      *                   MODAL ANALYSIS                          *
      * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+    /*
     MbsModal *mbs_modal;
     mbs_data->process = 4;
 
@@ -101,8 +103,7 @@ int main(int argc, char const *argv[])
 
     mbs_run_modal(mbs_modal, mbs_data);
     mbs_delete_modal(mbs_modal, mbs_data);
-    
-    
+    */
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
      *                   DIRECT DYNAMICS                         *
      * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -125,6 +126,7 @@ int main(int argc, char const *argv[])
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
      *                   INVERSE KINEMATICS                      *
      * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+    /*
     MbsSolvekin *mbs_solvekin;
     mbs_data->process = 5;
 
@@ -144,10 +146,11 @@ int main(int argc, char const *argv[])
 
     mbs_delete_solvekin(mbs_solvekin, mbs_data);
     
-    
+    */
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
      *                     INVERSE DYNAMICS                      *
      * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+    /*
     MbsInvdyn *mbs_invdyn;
     mbs_data->process = 6;
 
@@ -159,7 +162,7 @@ int main(int argc, char const *argv[])
     mbs_run_invdyn(mbs_invdyn, mbs_data);
 
     mbs_delete_invdyn(mbs_invdyn, mbs_data);
-    
+    */
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
      *                   CLOSING OPERATIONS                      *
      * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
