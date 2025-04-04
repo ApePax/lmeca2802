@@ -42,14 +42,6 @@ int count_lines(const char *filename) {
     return count > 0 ? count + 1 : 0;
 }
 
-typedef struct {
-    double **trajectory;  // 2D array storing the trajectory data
-    int index;           // Index for tracking progress in the trajectory
-    int rows;
-} Trajectory;
-
-Trajectory *traj = NULL;
-
 // Function to initialize trajectory data by reading from a CSV file
 void init_trajectory(Trajectory *traj, const char *filename, int rows, int cols) {
     traj->rows = rows;

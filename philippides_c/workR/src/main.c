@@ -39,6 +39,12 @@
 #include "structures.h"
 
 EXPORT_SYMBOL const char* filename_CSV = "../../Walking_Patterns/WP.csv";
+EXPORT_SYMBOL double FREQUENCY = 50.0;
+
+EXPORT_SYMBOL Contact_Manager *cm = NULL;
+EXPORT_SYMBOL HuntCrossleyHertz *hc_model = NULL;
+EXPORT_SYMBOL ViscoelasticCoulombModel *vc_model = NULL;
+EXPORT_SYMBOL Trajectory *traj = NULL;
 
 int main(int argc, char const *argv[])
 {

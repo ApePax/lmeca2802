@@ -8,6 +8,7 @@
  */
 
 #include "math.h"
+#include <stdio.h>
 #include "mbs_data.h"
 #include "mbs_project_interface.h"
 
@@ -19,16 +20,6 @@
 //      /!\ compute_penetrations: different from python,
 //          *deltas and *deltas_dot are passed as arguments
 // -------------------------------------------------------
-
-typedef struct {
-    int nSensors;
-    double **Contact_PxF;   // Positions of the contact points for each sensor (nSensors x 4)
-    double **Previous_PxF;  // Previous positions of the sensor (nSensors x 4)
-    int *InContact;         // Status of the sensor (0 or 1) (nSensors)
-    double *results;        // Force outputs on each sensor (4 * nSensors)
-} Contact_Manager;
-
-Contact_Manager *cm = NULL;
 
 // Function to create and initialize the Contact_Manager structure
 void create_contact_manager(int nSensors) {
@@ -124,37 +115,10 @@ void compute_penetrations(Contact_Manager *cm, int ixF, double PxF[4], double Vx
     }
 }
 
-// Function to free the memory used by the Contact_Manager
-void free_contact_manager(Contact_Manager *cm) {
-    for (int i = 0; i < cm->nSensors; i++) {
-        free(cm->Contact_PxF[i]);
-        free(cm->Previous_PxF[i]);
-    }
-    free(cm->Contact_PxF);
-    free(cm->Previous_PxF);
-    free(cm->InContact);
-    free(cm->results);
-    free(cm);
-}
-
 // -------------------------------------------------------
 //      FRICTION MODELS
 //  /!\ arguments of tangential force: *Fx,*Fy,*delta_no_slip_x,*delta_no_slip_y,*slip
 // -------------------------------------------------------
-#include <stdio.h>
-#include <math.h>
-
-typedef struct {
-    double k; // Stiffness coefficient
-    double n; // Nonlinearity exponent
-    double d; // Damping coefficient
-} HuntCrossleyHertz;
-
-typedef struct {
-    double mu; // Coefficient of friction
-    double k;  // Stiffness coefficient
-    double d;  // Damping coefficient
-} ViscoelasticCoulombModel;
 
 // Function to initialize the Hunt-Crossley Hertz model
 void create_hunt_crossley_hertz(HuntCrossleyHertz* model, double k, double n, double d) {
@@ -216,10 +180,6 @@ double compute_normal_force_viscoelastic(ViscoelasticCoulombModel *model, double
     }
     return Fz;
 }
-// Example usage of the Hunt-Crossley Hertz model
-HuntCrossleyHertz *hc_model = NULL;
-// Example usage of the Viscoelastic Coulomb model
-ViscoelasticCoulombModel *vc_model = NULL;
 
 double* user_ExtForces(double PxF[4], double RxF[4][4], 
     double VxF[4], double OMxF[4], 

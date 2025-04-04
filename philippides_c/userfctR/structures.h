@@ -14,8 +14,38 @@
     #define EXPORT_SYMBOL __attribute__((visibility("default")))
 #endif
 
+typedef struct {
+    int nSensors;
+    double **Contact_PxF;   // Positions of the contact points for each sensor (nSensors x 4)
+    double **Previous_PxF;  // Previous positions of the sensor (nSensors x 4)
+    int *InContact;         // Status of the sensor (0 or 1) (nSensors)
+    double *results;        // Force outputs on each sensor (4 * nSensors)
+} Contact_Manager;
 
-#define FREQUENCY 50.0
+typedef struct {
+    double k; // Stiffness coefficient
+    double n; // Nonlinearity exponent
+    double d; // Damping coefficient
+} HuntCrossleyHertz;
+
+typedef struct {
+    double mu; // Coefficient of friction
+    double k;  // Stiffness coefficient
+    double d;  // Damping coefficient
+} ViscoelasticCoulombModel;
+
+typedef struct {
+    double **trajectory;  // 2D array storing the trajectory data
+    int index;           // Index for tracking progress in the trajectory
+    int rows;
+} Trajectory;
+
+
+EXPORT_SYMBOL extern double FREQUENCY;
 EXPORT_SYMBOL extern const char* filename_CSV;
+EXPORT_SYMBOL extern Contact_Manager *cm;
+EXPORT_SYMBOL extern HuntCrossleyHertz *hc_model;
+EXPORT_SYMBOL extern ViscoelasticCoulombModel *vc_model;
+EXPORT_SYMBOL extern Trajectory *traj;
 
 #endif // STRUCTURES_H
