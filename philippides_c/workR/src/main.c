@@ -45,6 +45,7 @@ EXPORT_SYMBOL Contact_Manager *cm = NULL;
 EXPORT_SYMBOL HuntCrossleyHertz *hc_model = NULL;
 EXPORT_SYMBOL ViscoelasticCoulombModel *vc_model = NULL;
 EXPORT_SYMBOL Trajectory *traj = NULL;
+EXPORT_SYMBOL double voltages[4] = {0.0,0.0,0.0,0.0};
 
 int main(int argc, char const *argv[])
 {
@@ -57,8 +58,12 @@ int main(int argc, char const *argv[])
     mbs_msg("Loading the philippides data file !\n");
     mbs_data = mbs_load("philippides_c.mbs");
     mbs_msg("*.mbs file loaded!\n");
-    
-    
+
+    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+     *            Structures Initialisations                     *
+     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+    //TODO for all structures
+
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
      *              COORDINATE PARTITIONING                      *
      * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */

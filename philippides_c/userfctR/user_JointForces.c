@@ -105,12 +105,14 @@ double* user_JointForces(MbsData *mbs_data, double tsim) {
         u[i] = PWM_sat[i] * (Nominal_voltage / PWM_goal);
     }
     
-    // Store computed voltages for motors
-    /*
+    
     for (int i = 0; i < 4; i++) {
-        mbs_data->Voltages[i] = u[i];
+        if(voltages == NULL){
+            fprintf(stderr, "Wrong init \n");
+        }
+        voltages[i] = u[i];
     }
-    */
+    
     
     // Motor parameters
     double HGR = 353.5;   // Hip gear ratio

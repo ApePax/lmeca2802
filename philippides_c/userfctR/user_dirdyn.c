@@ -53,7 +53,7 @@
  void user_dirdyn_loop(MbsData *mbs_data, MbsDirdyn *mbs_dd)
  {
    set_output_vector(&(cm->results[4]),"Force_Sensors");
-    //set_output_vector(mbs_data->Voltages,"Voltages")
+   set_output_vector(voltages,"Voltages");
  }
  
  /*! \brief user own finishing functions

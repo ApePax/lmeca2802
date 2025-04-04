@@ -42,10 +42,11 @@ typedef struct {
 
 
 EXPORT_SYMBOL extern double FREQUENCY;
-EXPORT_SYMBOL extern const char* filename_CSV;
+EXPORT_SYMBOL extern const char *filename_CSV;
 EXPORT_SYMBOL extern Contact_Manager *cm;
 EXPORT_SYMBOL extern HuntCrossleyHertz *hc_model;
 EXPORT_SYMBOL extern ViscoelasticCoulombModel *vc_model;
 EXPORT_SYMBOL extern Trajectory *traj;
+EXPORT_SYMBOL extern double voltages[4];
 
 #endif // STRUCTURES_H
