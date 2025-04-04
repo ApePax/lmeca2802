@@ -19,6 +19,8 @@
  #include "set_output.h"
  #include "user_all_id.h"
  #include "mbs_sensor.h"
+
+ #include "structures.h"
  
  
  /*! \brief user own initialization functions
@@ -50,7 +52,7 @@
   */
  void user_dirdyn_loop(MbsData *mbs_data, MbsDirdyn *mbs_dd)
  {
-    //set_output_vector(mbs_data->Force_Sensors,"Force_Sensors")
+   set_output_vector(&(cm->results[4]),"Force_Sensors");
     //set_output_vector(mbs_data->Voltages,"Voltages")
  }
  

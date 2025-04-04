@@ -75,43 +75,6 @@ int main(int argc, char const *argv[])
     mbs_delete_part(mbs_part);
     
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-     *                    EQUILIBRIUM                            *
-     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-    /*
-    MbsEquil *mbs_equil;
-    mbs_data->process = 2;
-
-    mbs_equil = mbs_new_equil(mbs_data);
-
-    // Equil options (see documentations for additional options)
-    mbs_equil->options->method  = 1;
-    mbs_equil->options->senstol = 1e-2;
-    mbs_equil->options->verbose = 1;
-
-    mbs_run_equil(mbs_equil, mbs_data);
-
-    mbs_delete_equil(mbs_equil, mbs_data);
-    */
-    
-    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-     *                   MODAL ANALYSIS                          *
-     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-    /*
-    MbsModal *mbs_modal;
-    mbs_data->process = 4;
-
-    mbs_modal = mbs_new_modal(mbs_data);
-
-    // modal options (see documentations for additional options)
-    mbs_modal->options->save_result = 1;
-    mbs_modal->options->save_anim = 1;
-    mbs_modal->options->mode_ampl=0.2;
-    mbs_modal->options->verbose = 1;
-
-    mbs_run_modal(mbs_modal, mbs_data);
-    mbs_delete_modal(mbs_modal, mbs_data);
-    */
-    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
      *                   DIRECT DYNAMICS                         *
      * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
     MbsDirdyn *mbs_dirdyn;
@@ -130,46 +93,6 @@ int main(int argc, char const *argv[])
     mbs_delete_dirdyn(mbs_dirdyn, mbs_data);
     
     
-    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-     *                   INVERSE KINEMATICS                      *
-     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-    /*
-    MbsSolvekin *mbs_solvekin;
-    mbs_data->process = 5;
-
-    mbs_solvekin = mbs_new_solvekin(mbs_data);
-
-    // solvekin options, to interpolate part of the previous motion
-    mbs_solvekin->options->t0 = 1.33333;
-    mbs_solvekin->options->tf = 1.4;
-    mbs_solvekin->options->dt = 1e-4;
-    mbs_solvekin->options->framerate = 10000;
-    mbs_solvekin->options->motion = trajectory;
-    mbs_solvekin->options->trajectoryqname = "../../resultsR/dirdyn_q.res";
-    mbs_solvekin->options->trajectoryqdname = "../../resultsR/dirdyn_qd.res";
-    mbs_solvekin->options->trajectoryqddname = "../../resultsR/dirdyn_qdd.res";
-
-    mbs_run_solvekin(mbs_solvekin, mbs_data);
-
-    mbs_delete_solvekin(mbs_solvekin, mbs_data);
-    
-    */
-    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-     *                     INVERSE DYNAMICS                      *
-     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-    /*
-    MbsInvdyn *mbs_invdyn;
-    mbs_data->process = 6;
-
-    mbs_invdyn = mbs_new_invdyn(mbs_data);
-
-    // mbs_invdyn options (see documentations for additional options)
-    mbs_invdyn->options->motion = oneshot;
-
-    mbs_run_invdyn(mbs_invdyn, mbs_data);
-
-    mbs_delete_invdyn(mbs_invdyn, mbs_data);
-    */
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
      *                   CLOSING OPERATIONS                      *
      * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */

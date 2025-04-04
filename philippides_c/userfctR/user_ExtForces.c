@@ -257,9 +257,6 @@ double* user_ExtForces(double PxF[4], double RxF[4][4],
     cm->results[4 * ixF + 1] = *Fy;
     cm->results[4 * ixF + 2] = Fz;
     cm->results[4 * ixF + 3] = ixF;
-    if (ixF == 10) {
-        set_output_vector(&(cm->results[4]),"Force_Sensors");
-    }
 
     return SWr;
 }
