@@ -99,9 +99,6 @@ double* user_JointForces(MbsData *mbs_data, double tsim) {
     double q_ref[4];
     for (int i = 0; i < 4; i++) {
         q_ref[i] = traj->trajectory[trajectory_index][i+1];
-        if(tsim < 0.03){
-            fprintf(stderr, "%f %e %e %e %e \n", tsim, q_ref[0], q_ref[1], q_ref[2], q_ref[3]);
-        }
     }
     // Controller parameters
     double Kp = 900.0 / 128.0;

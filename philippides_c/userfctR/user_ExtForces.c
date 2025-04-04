@@ -29,8 +29,7 @@ typedef struct {
 } Contact_Manager;
 
 // Function to create and initialize the Contact_Manager structure
-Contact_Manager* create_contact_manager(int nSensors) {
-    Contact_Manager *cm = (Contact_Manager *)malloc(sizeof(Contact_Manager));
+void create_contact_manager(Contact_Manager* cm, int nSensors) {
     cm->nSensors = nSensors;
     
     // Allocate memory for Contact_PxF and Previous_PxF
@@ -59,7 +58,6 @@ Contact_Manager* create_contact_manager(int nSensors) {
         cm->results[i] = 0.0;
     }
 
-    return cm;
 }
 
 // Function to update the contact with a new sensor position
@@ -158,12 +156,10 @@ typedef struct {
 } ViscoelasticCoulombModel;
 
 // Function to initialize the Hunt-Crossley Hertz model
-HuntCrossleyHertz* create_hunt_crossley_hertz(double k, double n, double d) {
-    HuntCrossleyHertz *model = (HuntCrossleyHertz*)malloc(sizeof(HuntCrossleyHertz));
+void create_hunt_crossley_hertz(HuntCrossleyHertz* model, double k, double n, double d) {
     model->k = k;
     model->n = n;
     model->d = d;
-    return model;
 }
 
 // Function to compute the normal force using the Hunt-Crossley Hertz model
@@ -176,12 +172,10 @@ double compute_normal_force_hc(HuntCrossleyHertz *model, double delta, double de
 }
 
 // Function to initialize the Viscoelastic Coulomb model
-ViscoelasticCoulombModel* create_viscoelastic_coulomb(double mu, double k, double d) {
-    ViscoelasticCoulombModel *model = (ViscoelasticCoulombModel*)malloc(sizeof(ViscoelasticCoulombModel));
+void create_viscoelastic_coulomb(ViscoelasticCoulombModel* model, double mu, double k, double d) {
     model->mu = mu;
     model->k = k;
     model->d = d;
-    return model;
 }
 
 // Function to compute tangential force using the Viscoelastic Coulomb model
@@ -222,9 +216,9 @@ double compute_normal_force_viscoelastic(ViscoelasticCoulombModel *model, double
     return Fz;
 }
 // Example usage of the Hunt-Crossley Hertz model
-HuntCrossleyHertz *hc_model;
+HuntCrossleyHertz *hc_model = NULL;
 // Example usage of the Viscoelastic Coulomb model
-ViscoelasticCoulombModel *vc_model;
+ViscoelasticCoulombModel *vc_model = NULL;
 
 double* user_ExtForces(double PxF[4], double RxF[4][4], 
     double VxF[4], double OMxF[4], 
@@ -232,9 +226,14 @@ double* user_ExtForces(double PxF[4], double RxF[4][4],
     MbsData *mbs_data, double tsim, int ixF)
 {
     if(cm == NULL){
-        cm = create_contact_manager(11);
-        hc_model = create_hunt_crossley_hertz(1000.0, 1.5, 0.1);
-        vc_model = create_viscoelastic_coulomb(0.5, 1000.0, 0.1);
+        cm = (Contact_Manager *) malloc(sizeof(Contact_Manager));
+        hc_model = (HuntCrossleyHertz*) malloc(sizeof(HuntCrossleyHertz));
+        vc_model = (ViscoelasticCoulombModel*) malloc(sizeof(ViscoelasticCoulombModel));
+        create_contact_manager(cm, 11);
+        create_hunt_crossley_hertz(hc_model, 1000.0, 1.5, 0.1);
+        create_viscoelastic_coulomb(vc_model, 1, 1000.0, 0.1);
+
+        fprintf(stderr, "%f \n", cm->Contact_PxF[1][1]);
     }
 
     double Fx=0.0, Fy=0.0, Fz=0.0;
