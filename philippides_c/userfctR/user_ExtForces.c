@@ -133,7 +133,7 @@ void free_contact_manager(Contact_Manager *cm) {
     free(cm);
 }
 
-Contact_Manager *cm = create_contact_manager(11);
+Contact_Manager *cm = NULL;
 
 // -------------------------------------------------------
 //      FRICTION MODELS
@@ -182,29 +182,31 @@ ViscoelasticCoulombModel* create_viscoelastic_coulomb(double mu, double k, doubl
 }
 
 // Function to compute tangential force using the Viscoelastic Coulomb model
-void compute_tangential_force(ViscoelasticCoulombModel *model, double F_n, double delta_x, double delta_x_dot, double delta_y, double delta_y_dot, double *Fx, double *Fy, double *delta_no_slip_x, double *delta_no_slip_y, int *slip) {
+void compute_tangential_force(ViscoelasticCoulombModel *model, double F_n, double delta_x, double delta_x_dot,
+     double delta_y, double delta_y_dot, double Fx, double Fy, double delta_no_slip_x, double delta_no_slip_y, 
+     int slip) {
     // Compute raw viscoelastic forces
-    *Fx = -model->k * delta_x - model->d * delta_x_dot;
-    *Fy = -model->k * delta_y - model->d * delta_y_dot;
+    Fx = -model->k * delta_x - model->d * delta_x_dot;
+    Fy = -model->k * delta_y - model->d * delta_y_dot;
 
     // Compute total force magnitude
-    double F_total = sqrt(*Fx * *Fx + *Fy * *Fy);
+    double F_total = sqrt(Fx * Fx + Fy * Fy);
     // Maximum Coulomb force
     double F_max = model->mu * F_n;
 
     // Initialize (assuming no slip at first)
-    *delta_no_slip_x = 0;
-    *delta_no_slip_y = 0;
-    *slip = 0;
+    delta_no_slip_x = 0;
+    delta_no_slip_y = 0;
+    slip = 0;
 
     // Apply saturation (if slip occurs)
     if (F_total > F_max) {
         double scaling_factor = F_max / F_total;
-        *Fx *= scaling_factor;
-        *Fy *= scaling_factor;
-        *delta_no_slip_x = -( *Fx + model->d * delta_x_dot ) / model->k;
-        *delta_no_slip_y = -( *Fy + model->d * delta_y_dot ) / model->k;
-        *slip = 1;
+        Fx *= scaling_factor;
+        Fy *= scaling_factor;
+        delta_no_slip_x = -( Fx + model->d * delta_x_dot ) / model->k;
+        delta_no_slip_y = -( Fy + model->d * delta_y_dot ) / model->k;
+        slip = 1;
     }
 }
 
@@ -217,87 +219,21 @@ double compute_normal_force_viscoelastic(ViscoelasticCoulombModel *model, double
     return Fz;
 }
 // Example usage of the Hunt-Crossley Hertz model
-HuntCrossleyHertz *hc_model = create_hunt_crossley_hertz(1000.0, 1.5, 0.1);
+HuntCrossleyHertz *hc_model;
 // Example usage of the Viscoelastic Coulomb model
-ViscoelasticCoulombModel *vc_model = create_viscoelastic_coulomb(0.5, 1000.0, 0.1);
+ViscoelasticCoulombModel *vc_model;
 
 double* user_ExtForces(double PxF[4], double RxF[4][4], 
     double VxF[4], double OMxF[4], 
     double AxF[4], double OMPxF[4], 
     MbsData *mbs_data, double tsim, int ixF)
 {
-double Fx=0.0, Fy=0.0, Fz=0.0;
-double Mx=0.0, My=0.0, Mz=0.0;
-double dxF[4] ={0.0, 0.0, 0.0, 0.0};
+    if(cm == NULL){
+        cm = create_contact_manager(11);
+        hc_model = create_hunt_crossley_hertz(1000.0, 1.5, 0.1);
+        vc_model = create_viscoelastic_coulomb(0.5, 1000.0, 0.1);
+    }
 
-
-double *SWr = mbs_data->SWr[ixF];
-
-// default application point of the force: anchor point to which it is attached
-int idpt = 0;
-idpt = mbs_data->xfidpt[ixF];
-dxF[1] = mbs_data->dpt[1][idpt];
-dxF[2] = mbs_data->dpt[2][idpt];
-dxF[3] = mbs_data->dpt[3][idpt];
-
-// Begin user-defined force calculation
-// Update contact information (function would need to be implemented as part of cm or similar)
-update_contact(cm, ixF, PxF);
-
-// Compute penetrations and velocities (function would need to be implemented)
-double deltas[4], deltas_dot[4];
-compute_penetrations(cm, ixF, PxF, VxF, deltas, deltas_dot);
-
-// Compute normal force based on the chosen model (Hunt-Crossley-Hertz or Viscoelastic Coulomb)
-int Model = 0;
-if (Model == 0) {
-Fz = compute_normal_force(hc_model,deltas[2], deltas_dot[2]);
-}
-else if (Model == 1) {
-Fz = compute_normal_force(vc_model, deltas[2], deltas_dot[2]);
-}
-
-// Compute tangential forces
-double delta_no_slip_x = 0.0, delta_no_slip_y = 0.0;
-int slip = 0;
-compute_tangential_force(vc_model,Fz, deltas[0], deltas_dot[0], deltas[1], deltas_dot[1],
-    Fx, Fy, delta_no_slip_x, delta_no_slip_y, slip
-);
-
-// Update slip contact data
-update_slip_contact(cm, ixF, PxF, delta_no_slip_x, delta_no_slip_y, slip);
-
-// Concatenate force, torque, and force application point to the returned array.
-double *SWr = mbs_data->SWr[ixF];
-SWr[1] = Fx;
-SWr[2] = Fy;
-SWr[3] = Fz;
-SWr[4] = Mx;
-SWr[5] = My;
-SWr[6] = Mz;
-SWr[7] = dxF[1];
-SWr[8] = dxF[2];
-SWr[9] = dxF[3];
-
-// Store results in mbs_data.
-cm.results[4 * ixF] = Fx;
-cm.results[4 * ixF + 1] = Fy;
-cm.results[4 * ixF + 2] = Fz;
-cm.results[4 * ixF + 3] = ixF;
-if (ixF == 10) {
-mbs_data->Force_Sensors = cm.results[4];
-}
-
-return SWr;
-}
-
-
-"""
-double* user_ExtForces(double PxF[4], double RxF[4][4], 
-                       double VxF[4], double OMxF[4], 
-                       double AxF[4], double OMPxF[4], 
-                       MbsData *mbs_data, double tsim,int ixF)
-{
     double Fx=0.0, Fy=0.0, Fz=0.0;
     double Mx=0.0, My=0.0, Mz=0.0;
     double dxF[4] ={0.0, 0.0, 0.0, 0.0};
@@ -312,41 +248,52 @@ double* user_ExtForces(double PxF[4], double RxF[4][4],
     dxF[2] = mbs_data->dpt[2][idpt];
     dxF[3] = mbs_data->dpt[3][idpt];
 
-/* Begin of user declaration */
-    
-    
+    // Begin user-defined force calculation
+    // Update contact information (function would need to be implemented as part of cm or similar)
+    update_contact(cm, ixF, PxF);
 
-/* End of user declaration */
+    // Compute penetrations and velocities (function would need to be implemented)
+    double deltas[4], deltas_dot[4];
+    compute_penetrations(cm, ixF, PxF, VxF, deltas, deltas_dot);
 
-
-    switch(ixF){
-
-/* Begin of user code */
-        case 1: 
-
-                    
-        break;
-
-    /*  case 2: 
-
-            
-        break;
-    */
-        
-/* End of user code */
-
+    // Compute normal force based on the chosen model (Hunt-Crossley-Hertz or Viscoelastic Coulomb)
+    int Model = 0;
+    if (Model == 0) {
+        Fz = compute_normal_force_hc(hc_model,deltas[2], deltas_dot[2]);
+    }
+    else if (Model == 1) {
+        Fz = compute_normal_force_viscoelastic(vc_model, deltas[2], deltas_dot[2]);
     }
 
-    SWr[1]=Fx;
-    SWr[2]=Fy;
-    SWr[3]=Fz;
-    SWr[4]=Mx;
-    SWr[5]=My;
-    SWr[6]=Mz;
-    SWr[7]=dxF[1];
-    SWr[8]=dxF[2];
-    SWr[9]=dxF[3];
+    // Compute tangential forces
+    double delta_no_slip_x = 0.0, delta_no_slip_y = 0.0;
+    int slip = 0;
+    compute_tangential_force(vc_model,Fz, deltas[0], deltas_dot[0], deltas[1], deltas_dot[1],
+        Fx, Fy, delta_no_slip_x, delta_no_slip_y, slip
+    );
+
+    // Update slip contact data
+    update_slip_contact(cm, ixF, PxF, delta_no_slip_x, delta_no_slip_y, slip);
+
+    // Concatenate force, torque, and force application point to the returned array.
+    SWr[1] = Fx;
+    SWr[2] = Fy;
+    SWr[3] = Fz;
+    SWr[4] = Mx;
+    SWr[5] = My;
+    SWr[6] = Mz;
+    SWr[7] = dxF[1];
+    SWr[8] = dxF[2];
+    SWr[9] = dxF[3];
+
+    // Store results in mbs_data.
+    cm->results[4 * ixF] = Fx;
+    cm->results[4 * ixF + 1] = Fy;
+    cm->results[4 * ixF + 2] = Fz;
+    cm->results[4 * ixF + 3] = ixF;
+    if (ixF == 10) {
+        mbs_data->Force_Sensors = cm->results[4];
+    }
 
     return SWr;
 }
-"""

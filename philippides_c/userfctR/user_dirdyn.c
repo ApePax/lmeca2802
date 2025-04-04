@@ -15,6 +15,10 @@
 
  #include "mbs_data.h"
  #include "mbs_dirdyn_struct.h"
+
+ #include "set_output.h"
+ #include "user_all_id.h"
+ #include "mbs_sensor.h"
  
  
  /*! \brief user own initialization functions
@@ -48,7 +52,6 @@
  {
     set_output_vector(mbs_data->Force_Sensors,"Force_Sensors")
     set_output_vector(mbs_data->Voltages,"Voltages")
- 
  }
  
  /*! \brief user own finishing functions
