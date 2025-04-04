@@ -8,14 +8,14 @@
  *
  * Universite catholique de Louvain, Belgium 
  *
- * Last update : Tue May 19 13:31:40 2015
+ * Last update : Fri Apr  4 13:11:14 2025
  * --------------------------------------------------------
  *
  */
 #ifndef USERMODEL_h
 #define USERMODEL_h
 
-//#include "lut.h"
+
 
 #include "mbs_user_interface.h"
 // ============================================================ //
@@ -23,8 +23,7 @@
 
 struct UserModel 
 {
-    void* dummy;
- 
+        void* dummy;
 };
 
 // ============================================================ //
