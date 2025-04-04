@@ -31,8 +31,8 @@
   */
  void user_dirdyn_init(MbsData *mbs_data, MbsDirdyn *mbs_dd)
  {
-    define_output_vector("Force_Sensors",40)
-    define_output_vector("Voltages",4)
+    define_output_vector("Force_Sensors",40);
+    define_output_vector("Voltages",4);
  }
  
  /*! \brief user own loop functions
@@ -50,8 +50,8 @@
   */
  void user_dirdyn_loop(MbsData *mbs_data, MbsDirdyn *mbs_dd)
  {
-    set_output_vector(mbs_data->Force_Sensors,"Force_Sensors")
-    set_output_vector(mbs_data->Voltages,"Voltages")
+    //set_output_vector(mbs_data->Force_Sensors,"Force_Sensors")
+    //set_output_vector(mbs_data->Voltages,"Voltages")
  }
  
  /*! \brief user own finishing functions

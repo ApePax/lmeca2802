@@ -11,6 +11,9 @@
 #include "mbs_data.h"
 #include "mbs_project_interface.h"
 
+#include "set_output.h"
+
+
 // -------------------------------------------------------
 //      CONTACT MANAGER
 //      /!\ compute_penetrations: different from python,
@@ -292,7 +295,7 @@ double* user_ExtForces(double PxF[4], double RxF[4][4],
     cm->results[4 * ixF + 2] = Fz;
     cm->results[4 * ixF + 3] = ixF;
     if (ixF == 10) {
-        mbs_data->Force_Sensors = cm->results[4];
+        set_output_vector(&(cm->results[4]),"Force_Sensors");
     }
 
     return SWr;

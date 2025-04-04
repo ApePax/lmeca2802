@@ -47,7 +47,7 @@ int main(int argc, char const *argv[])
     MbsData *mbs_data;
 
     mbs_msg("Loading the philippides data file !\n");
-    mbs_data = mbs_load("philippides.mbs");
+    mbs_data = mbs_load("philippides_c.mbs");
     mbs_msg("*.mbs file loaded!\n");
     
     
@@ -65,7 +65,6 @@ int main(int argc, char const *argv[])
     mbs_run_part(mbs_part, mbs_data);
 
     mbs_delete_part(mbs_part);
-    
     
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
      *                    EQUILIBRIUM                            *

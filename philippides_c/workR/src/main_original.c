@@ -36,7 +36,7 @@
 #include "mbs_loader.h"
 #include "mbs_set.h"
 
-int main(int argc, char const *argv[])
+int main_original(int argc, char const *argv[])
 {
     mbs_msg("Starting philippides_c MBS project!\n");
 
