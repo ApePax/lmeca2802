@@ -73,13 +73,13 @@ void init_trajectory(Trajectory *traj, const char *filename, int rows, int cols)
 // Function to compute joint forces based on motor states and reference trajectory
 double* user_JointForces(MbsData *mbs_data, double tsim) {
     if(traj == NULL){
-        int rows = count_lines(filename);
+        int rows = count_lines(filename_CSV);
         traj = (Trajectory*)malloc(sizeof(Trajectory)); // Allocate memory for trajectory structure
         traj->trajectory = (double**)malloc(rows * sizeof(double*)); // Allocate memory for rows
         for (int i = 0; i < rows; i++) {
             traj->trajectory[i] = (double*)malloc(5 * sizeof(double)); // Allocate memory for columns
         }
-        init_trajectory(traj, filename, rows, 5); //There are 5 rows (time, 4 motors)
+        init_trajectory(traj, filename_CSV, rows, 5); //There are 5 rows (time, 4 motors)
     }
     // Reset all forces in the joint force array
     zeros_dvec_1(mbs_data->Qq);

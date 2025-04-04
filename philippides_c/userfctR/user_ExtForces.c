@@ -12,7 +12,7 @@
 #include "mbs_project_interface.h"
 
 #include "set_output.h"
-
+#include "structures.h"
 
 // -------------------------------------------------------
 //      CONTACT MANAGER

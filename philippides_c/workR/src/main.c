@@ -36,11 +36,13 @@
 #include "mbs_loader.h"
 #include "mbs_set.h"
 
+#include "structures.h"
+
+EXPORT_SYMBOL const char* filename_CSV = "../../Walking_Patterns/WP.csv";
+
 int main(int argc, char const *argv[])
 {
     mbs_msg("Starting philippides MBS project!\n");
-
-    
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
      *                     LOADING                               *
      * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
