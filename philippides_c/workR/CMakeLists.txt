@@ -73,6 +73,7 @@ target_link_libraries(Project_user Project_symbolic ${MBSYSC_LIBRARIES})
 add_executable(exe_${PROJECT_NAME} ${MAIN_SRC})
 add_dependencies(exe_${PROJECT_NAME} Project_user Project_symbolic)
 target_link_libraries(exe_${PROJECT_NAME} ${MBSYSC_LIBRARIES})
+target_link_libraries(exe_${PROJECT_NAME} Project_user)
 
 # Windows: default start up project is the executable
 set_property(DIRECTORY PROPERTY VS_STARTUP_PROJECT "${exe_${PROJECT_NAME}}")

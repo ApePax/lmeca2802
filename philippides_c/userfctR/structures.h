@@ -47,6 +47,6 @@ EXPORT_SYMBOL extern Contact_Manager *cm;
 EXPORT_SYMBOL extern HuntCrossleyHertz *hc_model;
 EXPORT_SYMBOL extern ViscoelasticCoulombModel *vc_model;
 EXPORT_SYMBOL extern Trajectory *traj;
-EXPORT_SYMBOL extern double voltages[4];
+EXPORT_SYMBOL extern double *voltages;
 
 #endif // STRUCTURES_H

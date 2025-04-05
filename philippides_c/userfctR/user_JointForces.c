@@ -72,6 +72,7 @@ double* user_JointForces(MbsData *mbs_data, double tsim) {
             traj->trajectory[i] = (double*)malloc(5 * sizeof(double)); // Allocate memory for columns
         }
         init_trajectory(traj, filename_CSV, rows, 5); //There are 5 rows (time, 4 motors)
+        voltages = (double*) malloc(sizeof(double)*4);
     }
     // Reset all forces in the joint force array
     zeros_dvec_1(mbs_data->Qq);
@@ -107,9 +108,6 @@ double* user_JointForces(MbsData *mbs_data, double tsim) {
     
     
     for (int i = 0; i < 4; i++) {
-        if(voltages == NULL){
-            fprintf(stderr, "Wrong init \n");
-        }
         voltages[i] = u[i];
     }
     
