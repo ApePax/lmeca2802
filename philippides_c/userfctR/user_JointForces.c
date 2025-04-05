@@ -19,61 +19,8 @@
 
 #include "structures.h"
 
-int count_lines(const char *filename) {
-
-    FILE *file = fopen(filename, "r");
-    if (file == NULL) {
-        perror("Error opening file");
-        return -1;  
-    }
-
-    int count = 0;
-    char ch;
-
-    while ((ch = fgetc(file)) != EOF) {
-        if (ch == '\n') {
-            count++;
-        }
-    }
-
-    fclose(file);
-
-    // If file isn't empty, add 1 (last line may not have '\n')
-    return count > 0 ? count + 1 : 0;
-}
-
-// Function to initialize trajectory data by reading from a CSV file
-void init_trajectory(Trajectory *traj, const char *filename, int rows, int cols) {
-    traj->rows = rows;
-    traj->index = 0;
-    FILE *file = fopen(filename, "r"); // Open the file for reading
-    if (!file) {
-        perror("Error opening file");
-    }
-    char buffer[1024];
-    fgets(buffer, sizeof(buffer), file); // Skip the header line
-    
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            fscanf(file, "%lf,", &traj->trajectory[i][j]); // Read values from file
-        }
-    }
-    
-    fclose(file); // Close the file
-}
-
 // Function to compute joint forces based on motor states and reference trajectory
 double* user_JointForces(MbsData *mbs_data, double tsim) {
-    if(traj == NULL){
-        int rows = count_lines(filename_CSV);
-        traj = (Trajectory*)malloc(sizeof(Trajectory)); // Allocate memory for trajectory structure
-        traj->trajectory = (double**)malloc(rows * sizeof(double*)); // Allocate memory for rows
-        for (int i = 0; i < rows; i++) {
-            traj->trajectory[i] = (double*)malloc(5 * sizeof(double)); // Allocate memory for columns
-        }
-        init_trajectory(traj, filename_CSV, rows, 5); //There are 5 rows (time, 4 motors)
-        voltages = (double*) malloc(sizeof(double)*4);
-    }
     // Reset all forces in the joint force array
     zeros_dvec_1(mbs_data->Qq);
     // Retrieve motor IDs for different joints

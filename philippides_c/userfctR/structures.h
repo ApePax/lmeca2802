@@ -49,4 +49,10 @@ EXPORT_SYMBOL extern ViscoelasticCoulombModel *vc_model;
 EXPORT_SYMBOL extern Trajectory *traj;
 EXPORT_SYMBOL extern double *voltages;
 
+EXPORT_SYMBOL void init_voltages(void);
+EXPORT_SYMBOL void init_trajectory(void);
+EXPORT_SYMBOL void init_contact_manager(int nSensors);
+EXPORT_SYMBOL void init_viscoelastic_coulomb(double mu, double k, double d);
+EXPORT_SYMBOL void init_hunt_crossley_hertz(double k, double n, double d);
+
 #endif // STRUCTURES_H

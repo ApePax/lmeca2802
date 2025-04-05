@@ -38,6 +38,11 @@
 
 #include "structures.h"
 
+// CSV parameters
+const char* filename_CSV = "../../Walking_Patterns/WP.csv";
+double FREQUENCY = 50.0;
+int COLUMNS = 5; // time,q1_l,q1_r,q2_l,q2_r -> 5 columns
+
 int main(int argc, char const *argv[])
 {
     mbs_msg("Starting philippides MBS project!\n");
@@ -53,7 +58,11 @@ int main(int argc, char const *argv[])
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
      *            Structures Initialisations                     *
      * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-    //TODO for all structures
+    init_voltages();
+    init_trajectory();
+    init_contact_manager(11);
+    init_viscoelastic_coulomb(0.8, 2e4, 100.0);
+    init_hunt_crossley_hertz(5e4, 1.5, 0.3);
 
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
      *              COORDINATE PARTITIONING                      *

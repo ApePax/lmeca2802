@@ -21,39 +21,6 @@
 //          *deltas and *deltas_dot are passed as arguments
 // -------------------------------------------------------
 
-// Function to create and initialize the Contact_Manager structure
-void create_contact_manager(int nSensors) {
-    cm = (Contact_Manager *) malloc(sizeof(Contact_Manager));
-    cm->nSensors = nSensors;
-    
-    // Allocate memory for Contact_PxF and Previous_PxF
-    cm->Contact_PxF = (double **)malloc(nSensors * sizeof(double *));
-    cm->Previous_PxF = (double **)malloc(nSensors * sizeof(double *));
-    
-    for (int i = 0; i < nSensors; i++) {
-        cm->Contact_PxF[i] = (double *)malloc(4 * sizeof(double)); // 4 values per sensor
-        cm->Previous_PxF[i] = (double *)malloc(4 * sizeof(double)); // 4 values per sensor
-    }
-    
-    // Allocate memory for InContact and results
-    cm->InContact = (int *)malloc(nSensors * sizeof(int));
-    cm->results = (double *)malloc(4 * nSensors * sizeof(double)); // 4 * nSensors results
-    
-    // Initialize values to NaN or zero
-    for (int i = 0; i < nSensors; i++) {
-        for (int j = 0; j < 4; j++) {
-            cm->Contact_PxF[i][j] = NAN;
-            cm->Previous_PxF[i][j] = NAN;
-        }
-        cm->InContact[i] = 0;
-    }
-    
-    for (int i = 0; i < 4 * nSensors; i++) {
-        cm->results[i] = 0.0;
-    }
-
-}
-
 // Function to update the contact with a new sensor position
 void update_contact(Contact_Manager *cm, int ixF, double PxF[4]) {
     if (isnan(cm->Previous_PxF[ixF][0])) {
@@ -115,18 +82,6 @@ void compute_penetrations(Contact_Manager *cm, int ixF, double PxF[4], double Vx
     }
 }
 
-// -------------------------------------------------------
-//      FRICTION MODELS
-//  /!\ arguments of tangential force: *Fx,*Fy,*delta_no_slip_x,*delta_no_slip_y,*slip
-// -------------------------------------------------------
-
-// Function to initialize the Hunt-Crossley Hertz model
-void create_hunt_crossley_hertz(HuntCrossleyHertz* model, double k, double n, double d) {
-    model->k = k;
-    model->n = n;
-    model->d = d;
-}
-
 // Function to compute the normal force using the Hunt-Crossley Hertz model
 double compute_normal_force_hc(HuntCrossleyHertz *model, double delta, double delta_dot) {
     double Fz = 0.0;
@@ -134,13 +89,6 @@ double compute_normal_force_hc(HuntCrossleyHertz *model, double delta, double de
         Fz = model->k * pow(fabs(delta), model->n) * (1 - model->d * delta_dot);
     }
     return Fz;
-}
-
-// Function to initialize the Viscoelastic Coulomb model
-void create_viscoelastic_coulomb(ViscoelasticCoulombModel* model, double mu, double k, double d) {
-    model->mu = mu;
-    model->k = k;
-    model->d = d;
 }
 
 // Function to compute tangential force using the Viscoelastic Coulomb model
@@ -186,13 +134,6 @@ double* user_ExtForces(double PxF[4], double RxF[4][4],
     double AxF[4], double OMPxF[4], 
     MbsData *mbs_data, double tsim, int ixF)
 {
-    if(cm == NULL){
-        hc_model = (HuntCrossleyHertz*) malloc(sizeof(HuntCrossleyHertz));
-        vc_model = (ViscoelasticCoulombModel*) malloc(sizeof(ViscoelasticCoulombModel));
-        create_contact_manager(11);
-        create_hunt_crossley_hertz(hc_model, 5e4, 1.5, 0.3);
-        create_viscoelastic_coulomb(vc_model, 0.8, 2e4, 100.0);
-    }
 
     double *Fx, *Fy; double Fz=0.0;
     double Mx=0.0, My=0.0, Mz=0.0;
@@ -257,6 +198,9 @@ double* user_ExtForces(double PxF[4], double RxF[4][4],
     cm->results[4 * ixF + 1] = *Fy;
     cm->results[4 * ixF + 2] = Fz;
     cm->results[4 * ixF + 3] = ixF;
+
+    // Free temporary variables
+    free(Fx); free(Fy); free(delta_no_slip_x); free(delta_no_slip_y); free(slip);
 
     return SWr;
 }
