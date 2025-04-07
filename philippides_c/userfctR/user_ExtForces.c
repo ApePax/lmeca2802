@@ -59,8 +59,8 @@ void update_contact(Contact_Manager *cm, int ixF, double PxF[4]) {
 // Function to update slip contact
 void update_slip_contact(Contact_Manager *cm, int ixF, double PxF[4], double delta_slip_x, double delta_slip_y, int slip) {
     if (slip == 1 && cm->InContact[ixF] == 1) {
-        cm->Contact_PxF[ixF][1] = PxF[1] - delta_slip_x;
-        cm->Contact_PxF[ixF][2] = PxF[2] - delta_slip_y;
+        cm->Contact_PxF[ixF][1] = PxF[1] + delta_slip_x;
+        cm->Contact_PxF[ixF][2] = PxF[2] + delta_slip_y;
     }
 }
 

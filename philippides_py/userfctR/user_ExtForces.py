@@ -4,6 +4,7 @@
 # (c) Universite catholique de Louvain, 2019
 #TODO: Ajuster les valeur des modèle de contact (avec Brieuc)
 import numpy as np
+
 class Contact_Manager:
     def __init__(self, nSensors):
         """
@@ -66,7 +67,7 @@ class Contact_Manager:
             slip (int) : binary {0: stick , 1: slip}
         """
         if slip == 1 and self.InContact[ixF] == 1:                                       
-            self.Contact_PxF[ixF, 1:3] = PxF[1:3] -np.array([delta_slip_x, delta_slip_y]) 
+            self.Contact_PxF[ixF, 1:3] = PxF[1:3] + np.array([delta_slip_x, delta_slip_y]) 
         return
     
     def compute_penetrations(self, ixF, PxF, VxF):
@@ -158,21 +159,20 @@ class ViscoelasticCoulombModel:
         # Compute total force magnitude
         F_total = np.sqrt(Fx**2 + Fy**2)
         # Maximum Coulomb force
-        F_max = self.mu * F_n                           
+        F_max = max(self.mu * F_n,0)                          
 
         # Initialisation /!\ Not accurate if no slippage
         delta_no_slip_x, delta_no_slip_y = 0, 0        
         slip = 0
 
         # Apply saturation
-        if F_total > max(F_max,0):
+        if F_total > F_max:
             scaling_factor = F_max / F_total                        # Force normalisation respecting proportions
             Fx *= scaling_factor                                    #
             Fy *= scaling_factor                                    #
             delta_no_slip_x = -(Fx + self.d * delta_x_dot) / self.k # Inverse ViscoElsatic model for Coulomb saturated forces
             delta_no_slip_y = -(Fy + self.d * delta_y_dot) / self.k # 
             slip = 1                                                # Update slip status
-          
         return Fx, Fy, delta_no_slip_x, delta_no_slip_y, slip
     
     def compute_normal_force(self, delta, delta_dot):
@@ -196,20 +196,20 @@ Model = 0
 # lambda = 3/2 * k * alpha = k * d => d = 3/2 *alpha
 # Xing [5e4 , 1.5 , 0.3]
 # Brieuc [1e4, 1.5, 3.3]
-k = 5e4       # Stiffness coefficient
+k = 1e4       # Stiffness coefficient
 n = 1.5       # Nonlinearity exponent (3/2 for Hertzian contact)
-d = 0.3       # Damping coefficient
+d = 3.3       # Damping coefficient
 hch_model = HuntCrossleyHertz(k, n, d)
 
 # Instantiate a ViscoElastic Coulomb model
+# Xing [0.8,2e4,100.0]
 mu = 0.8      # Coefficient of friction
 k = 2e4       # Stiffness coefficient
-d = 100.0     # Damping coefficient
+d = 50.0     # Damping coefficient
 vc_model = ViscoelasticCoulombModel(mu, k, d)
 
 # Instantiate a ContactManager
 cm = Contact_Manager(11) # For 10 sensors to be accessed through their ID
-
 
 def user_ExtForces(PxF, RxF, VxF, OMxF, AxF, OMPxF, mbs_data, tsim, ixF):
     """Compute an user-specified external force.
