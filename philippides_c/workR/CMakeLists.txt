@@ -15,11 +15,16 @@
 #                       PROJECT MAIN CONFIGURATIONS
 # * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
+
 # CMake minimum version
 cmake_minimum_required(VERSION 3.11)
 
 # project name
-project (philippides_c)
+# MODIFIED /!\
+project (philippides_c C CXX)
+# ADDED /!\
+find_package(Threads REQUIRED)
+
 
 # message to display the project name
 message(STATUS "Processing ${PROJECT_NAME}")
@@ -74,6 +79,8 @@ add_executable(exe_${PROJECT_NAME} ${MAIN_SRC})
 add_dependencies(exe_${PROJECT_NAME} Project_user Project_symbolic)
 target_link_libraries(exe_${PROJECT_NAME} ${MBSYSC_LIBRARIES})
 target_link_libraries(exe_${PROJECT_NAME} Project_user)
+# ADDED /!\
+target_link_libraries(exe_${PROJECT_NAME} Threads::Threads)
 
 # Windows: default start up project is the executable
 set_property(DIRECTORY PROPERTY VS_STARTUP_PROJECT "${exe_${PROJECT_NAME}}")
