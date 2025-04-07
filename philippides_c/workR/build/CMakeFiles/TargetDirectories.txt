@@ -1,0 +1,9 @@
+/home/gaxirs/.robotran/lmeca2802/philippides_c/workR/build/CMakeFiles/Project_user.dir
+/home/gaxirs/.robotran/lmeca2802/philippides_c/workR/build/CMakeFiles/Project_symbolic.dir
+/home/gaxirs/.robotran/lmeca2802/philippides_c/workR/build/CMakeFiles/exe_philippides_c.dir
+/home/gaxirs/.robotran/lmeca2802/philippides_c/workR/build/CMakeFiles/edit_cache.dir
+/home/gaxirs/.robotran/lmeca2802/philippides_c/workR/build/CMakeFiles/rebuild_cache.dir
+/home/gaxirs/.robotran/lmeca2802/philippides_c/workR/build/CMakeFiles/list_install_components.dir
+/home/gaxirs/.robotran/lmeca2802/philippides_c/workR/build/CMakeFiles/install.dir
+/home/gaxirs/.robotran/lmeca2802/philippides_c/workR/build/CMakeFiles/install/local.dir
+/home/gaxirs/.robotran/lmeca2802/philippides_c/workR/build/CMakeFiles/install/strip.dir
