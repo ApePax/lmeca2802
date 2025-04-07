@@ -64,20 +64,20 @@ double* user_JointForces(MbsData *mbs_data, double tsim) {
     double KGR = 212.6;   // Knee gear ratio
     double ktp = 0.395 / HGR;   // Torque constant w.r.t. voltage [Nm/V]
     double Kvp = 1.589 / (HGR * HGR); // Viscous friction constant [Nm*s/rad]
-    double τc_u = 0.065 / HGR;  // Dry friction torque [Nm]
+    double tauc_u = 0.065 / HGR;  // Dry friction torque [Nm]
     
     // Compute motor torques
     double gear_ratios[4] = {HGR, HGR, KGR, KGR};
-    double w[4], τ_0[4], τ_m[4];
+    double w[4], tau_0[4], tau_m[4];
     for (int i = 0; i < 4; i++) {
         w[i] = qd_motors[i] * gear_ratios[i];
-        τ_0[i] = u[i] * gear_ratios[i] * ktp - w[i] * gear_ratios[i] * Kvp;
-        τ_m[i] = τ_0[i] - ((w[i] > 0) ? τc_u * gear_ratios[i] : -τc_u * gear_ratios[i]);
+        tau_0[i] = u[i] * gear_ratios[i] * ktp - w[i] * gear_ratios[i] * Kvp;
+        tau_m[i] = tau_0[i] - ((w[i] > 0) ? tauc_u * gear_ratios[i] : -tauc_u * gear_ratios[i]);
     }
     
     // Assign computed torques to joint force array
     for (int i = 0; i < 4; i++) {
-        mbs_data->Qq[motor_ids[i]] = τ_m[i];
+        mbs_data->Qq[motor_ids[i]] = tau_m[i];
     }
     
     return mbs_data->Qq;

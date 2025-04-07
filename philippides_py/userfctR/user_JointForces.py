@@ -73,12 +73,12 @@ def user_JointForces(mbs_data, tsim):
     KGR = 212.6             # Knee gear-ratio
     ktp  = 0.395/HGR        # Torque constant with respect to the voltage [Nm/V] 
     Kvp  = 1.589/(HGR*HGR)  # Viscous friction constant [Nm*s/rad] (linked to motor speed)
-    τc_u  = 0.065/HGR       # Dry friction torque [Nm]
+    tauc_u  = 0.065/HGR       # Dry friction torque [Nm]
  
     gear_ratios = np.array([HGR,HGR,KGR,KGR])
     w = qd_motors * gear_ratios
-    τ_0 = u * gear_ratios* ktp - w * gear_ratios * Kvp
-    τ_m = τ_0 - np.sign(w) * gear_ratios * τc_u
+    tau_0 = u * gear_ratios* ktp - w * gear_ratios * Kvp
+    tau_m = tau_0 - np.sign(w) * gear_ratios * tauc_u
     for i in range(motor_ids.size):
-        mbs_data.Qq[motor_ids[i]] = τ_m[i]
+        mbs_data.Qq[motor_ids[i]] = tau_m[i]
     return
