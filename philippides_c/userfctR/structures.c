@@ -122,13 +122,19 @@ void init_contact_manager(int nSensors) {
 
 }
 
-void free_contact_manager(void){
-    free(cm->InContact);
-    free(cm->results);
+void free_contact_manager(void) {
+    for (int i = 0; i < cm->nSensors; i++) {
+        free(cm->Contact_PxF[i]);
+        free(cm->Previous_PxF[i]);
+    }
+
     free(cm->Contact_PxF);
     free(cm->Previous_PxF);
+    free(cm->InContact);
+    free(cm->results);
     free(cm);
 }
+
 
 // Function to initialize the Viscoelastic Coulomb model
 void init_viscoelastic_coulomb(double mu, double k, double d) {
