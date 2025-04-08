@@ -65,6 +65,53 @@ int main(int argc, char const *argv[])
     init_hunt_crossley_hertz(5e4, 1.5, 0.3);
 
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+     *              INPUT RECOVERY                               *
+     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+    if (argc != 2) {
+        printf("Expected a single string argument!\n");
+        return 1;
+    }
+
+    char *input = argv[1];
+    printf("Received string: %s\n", input);
+
+    // Tokenize using ","
+    char *token = strtok(input, ",");
+    int count = 1;
+    double values[20];
+    while (token != NULL) {
+        double val = atof(token);
+        values[count-1] = val;
+        token = strtok(NULL, ",");
+        count++;
+    }
+    printf("Stored values in array:\n");
+    for (int i = 0; i < count-1; i++) {
+        printf("values[%d] = %f\n", i, values[i]);
+    }
+    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+     *              SET INITIAL CONDITIONS                               *
+     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+    /*
+    mbs_data->q[] =
+    mbs_data->q[] =
+    mbs_data->q[] =
+    mbs_data->q[] =
+    mbs_data->q[] =
+    mbs_data->q[] =
+    mbs_data->q[] =
+    mbs_data->q[] =
+    mbs_data->q[] =
+    mbs_data->q[] =
+    mbs_data->q[] =
+    mbs_data->q[] =
+    mbs_data->q[] =
+    mbs_data->q[] =
+    mbs_data->q[] =
+    */
+ 
+    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
      *              COORDINATE PARTITIONING                      *
      * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
     MbsPart *mbs_part;
@@ -90,7 +137,7 @@ int main(int argc, char const *argv[])
     // dirdyn options (see documentations for additional options)
     mbs_dirdyn->options->dt0 = 1e-3;
     mbs_dirdyn->options->tf  = 10.0;
-    mbs_dirdyn->options->save2file = 1;
+    mbs_dirdyn->options->save2file = 0;
     //mbs_dirdyn->options->realtime = 1;
 
     mbs_run_dirdyn(mbs_dirdyn, mbs_data);
