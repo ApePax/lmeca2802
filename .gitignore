@@ -1,1 +1,8 @@
 .vscode
+philippides_c/animationR/
+philippides_c/resultsR/
+philippides_c/workR/build/
+philippides_py/userfctR/__pycache__/
+philippides_py/animationR/
+philippides_py/resultsR/
+philippides_py/workR/profiler_output.prof

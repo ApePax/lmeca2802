@@ -23,6 +23,10 @@ void init_voltages(void) {
     }
 }
 
+void free_voltages(void) {
+    free(voltages);
+}
+
 int count_lines(const char *filename) {
 
     FILE *file = fopen(filename, "r");
@@ -76,6 +80,15 @@ void init_trajectory(void) {
     fill_trajectory(traj, filename_CSV, rows, 5); //There are 5 rows (time, 4 motors)
 }
 
+void free_trajectory(void) {
+    int rows = count_lines(filename_CSV);
+    for(int i = 0; i < rows; i++){
+        free(traj->trajectory[i]);
+    }
+    free(traj->trajectory);
+    free(traj);
+}
+
 // Function to create and initialize the Contact_Manager structure
 void init_contact_manager(int nSensors) {
     cm = (Contact_Manager *) malloc(sizeof(Contact_Manager));
@@ -109,6 +122,14 @@ void init_contact_manager(int nSensors) {
 
 }
 
+void free_contact_manager(void){
+    free(cm->InContact);
+    free(cm->results);
+    free(cm->Contact_PxF);
+    free(cm->Previous_PxF);
+    free(cm);
+}
+
 // Function to initialize the Viscoelastic Coulomb model
 void init_viscoelastic_coulomb(double mu, double k, double d) {
     vc_model = (ViscoelasticCoulombModel*) malloc(sizeof(ViscoelasticCoulombModel));
@@ -117,10 +138,18 @@ void init_viscoelastic_coulomb(double mu, double k, double d) {
     vc_model->d = d;
 }
 
+void free_viscoelastic_coulomb(void) {
+    free(vc_model);
+}
+
 // Function to initialize the Hunt-Crossley Hertz model
 void init_hunt_crossley_hertz(double k, double n, double d) {
     hc_model = (HuntCrossleyHertz*) malloc(sizeof(HuntCrossleyHertz));
     hc_model->k = k;
     hc_model->n = n;
     hc_model->d = d;
+}
+
+void free_hunt_crossley_hertz(void) {
+    free(hc_model);
 }

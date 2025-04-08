@@ -55,4 +55,10 @@ EXPORT_SYMBOL void init_contact_manager(int nSensors);
 EXPORT_SYMBOL void init_viscoelastic_coulomb(double mu, double k, double d);
 EXPORT_SYMBOL void init_hunt_crossley_hertz(double k, double n, double d);
 
+EXPORT_SYMBOL void free_voltages(void);
+EXPORT_SYMBOL void free_trajectory(void);
+EXPORT_SYMBOL void free_contact_manager(void);
+EXPORT_SYMBOL void free_viscoelastic_coulomb(void);
+EXPORT_SYMBOL void free_hunt_crossley_hertz(void);
+
 #endif // STRUCTURES_H
