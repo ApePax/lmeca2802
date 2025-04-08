@@ -6,5 +6,5 @@ C_DEFINES = -DBUILD_PATH=\"/home/gaxirs/.robotran/lmeca2802/philippides_c/workR/
 
 C_INCLUDES = -I/home/gaxirs/.robotran/mbsysc/MBsysC/install/include/MBsysC_struct -I/home/gaxirs/.robotran/mbsysc/MBsysC/install/include/MBsysC_module -I/home/gaxirs/.robotran/mbsysc/MBsysC/install/include/MBsysC_load -I/home/gaxirs/.robotran/mbsysc/MBsysC/install/include/MBsysC_utilities -I/home/gaxirs/.robotran/mbsysc/MBsysC/install/include/MBsysC_numerics -I/home/gaxirs/.robotran/mbsysc/MBsysC/install/include/MBsysC_realtime -I/home/gaxirs/.robotran/lmeca2802/philippides_c/workR/../symbolicR -I/home/gaxirs/.robotran/lmeca2802/philippides_c/workR/../userfctR -I/home/gaxirs/.robotran/lmeca2802/philippides_c/workR/src
 
-C_FLAGS = 
+C_FLAGS = -g
 

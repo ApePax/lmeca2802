@@ -103,6 +103,15 @@ int main(int argc, char const *argv[])
      * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
     mbs_delete_data(mbs_data);
 
+    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+     *              Release Structure Memory                     *
+     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+    free_voltages();
+    free_trajectory();
+    free_contact_manager();
+    free_viscoelastic_coulomb();
+    free_hunt_crossley_hertz();
+
     return 0;
 }
 
