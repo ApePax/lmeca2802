@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/exe_philippides_c.dir/src/main.c.o"
+  "CMakeFiles/exe_philippides_c.dir/src/main.c.o.d"
   "exe_philippides_c"
   "exe_philippides_c.pdb"
 )
