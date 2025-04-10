@@ -89,6 +89,7 @@ void philippides(double x[20]) {
     mbs_dirdyn->options->tf = 5.0;
     mbs_dirdyn->options->save2file = 0; // 1
     mbs_dirdyn->options->verbose = 0;
+    
     mbs_run_dirdyn(mbs_dirdyn, mbs_data);
     mbs_delete_dirdyn(mbs_dirdyn, mbs_data);
 
