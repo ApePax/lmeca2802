@@ -97,13 +97,14 @@ function system(;
         q_ref = SVector{1,Float64}(0.0)
         results = []
         cd("../../../../philippides_J2C/workR/build") do
-            x = SVector{20,Float64}(q...,q̇...,u...,q_ref...)
+            x = [q...,q̇...,u...,q_ref...]
             call_philippides(x)
             res = get_results()
-            push!(results,res)
+            push!(results,res...)
         end        
 
         x_next = SVector{6,Float64}(results[1:3]...,results[5:7]...)
+        println(x_next)
         return x_next
     end
     # Define state space (bounds should be set according to your robot's joint limits)

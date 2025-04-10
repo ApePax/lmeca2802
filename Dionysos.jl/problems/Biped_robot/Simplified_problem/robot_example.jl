@@ -60,10 +60,10 @@ end
 ################### File Parameters ###################
 #######################################################
 filename_save = joinpath(@__DIR__, "Abstraction_solver.jld2")
-do_empty_optim = false
+do_empty_optim = true
 verify_save = false
 First_part = false
-Second_part = true
+Second_part = false
 
 #######################################################
 ################### Optim Parameters ##################

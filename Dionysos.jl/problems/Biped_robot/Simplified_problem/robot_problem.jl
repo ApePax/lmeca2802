@@ -165,7 +165,7 @@ function system(;
         x_next = SVector{length(x)}(qs[end][3:5]..., vs[end][3:5]...)
         # Note: qs and vs are vectors of speed and position for every step of the simulation (i.e. every Δt = 1e-4)
         # Only the final states are useful in our case
-
+        println(x_next)
         return x_next
     end
     # Define state space (bounds should be set according to your robot's joint limits)
