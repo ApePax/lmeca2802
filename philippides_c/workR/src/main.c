@@ -63,53 +63,6 @@ int main(int argc, char const *argv[])
     init_contact_manager(11);
     init_viscoelastic_coulomb(0.8, 2e4, 100.0);
     init_hunt_crossley_hertz(5e4, 1.5, 0.3);
-
-    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-     *              INPUT RECOVERY                               *
-     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
-    if (argc != 2) {
-        printf("Expected a single string argument!\n");
-        return 1;
-    }
-
-    char *input = argv[1];
-    printf("Received string: %s\n", input);
-
-    // Tokenize using ","
-    char *token = strtok(input, ",");
-    int count = 1;
-    double values[20];
-    while (token != NULL) {
-        double val = atof(token);
-        values[count-1] = val;
-        token = strtok(NULL, ",");
-        count++;
-    }
-    printf("Stored values in array:\n");
-    for (int i = 0; i < count-1; i++) {
-        printf("values[%d] = %f\n", i, values[i]);
-    }
-    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-     *              SET INITIAL CONDITIONS                               *
-     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-    /*
-    mbs_data->q[] =
-    mbs_data->q[] =
-    mbs_data->q[] =
-    mbs_data->q[] =
-    mbs_data->q[] =
-    mbs_data->q[] =
-    mbs_data->q[] =
-    mbs_data->q[] =
-    mbs_data->q[] =
-    mbs_data->q[] =
-    mbs_data->q[] =
-    mbs_data->q[] =
-    mbs_data->q[] =
-    mbs_data->q[] =
-    mbs_data->q[] =
-    */
  
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
      *              COORDINATE PARTITIONING                      *
@@ -158,23 +111,5 @@ int main(int argc, char const *argv[])
     free_contact_manager();
     free_viscoelastic_coulomb();
     free_hunt_crossley_hertz();
-
-    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-     *              Return Results                               *
-     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-    double res[6];
-
-    // Example: fill res[] with values from a computation
-    res[0] = 42.0;
-    res[1] = 3.14159;
-    res[2] = -7.5;
-    res[3] = 0.00123;
-    res[4] = 9999.99;
-    res[5] = 123456.789;
-
-    printf("%.15lf %.15lf %.15lf %.15lf %.15lf %.15lf\n", res[0], res[1], res[2], res[3], res[4], res[5]);
-
-
-    return 0;
 }
 
