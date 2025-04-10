@@ -22,7 +22,7 @@ include(
 
 using Libdl
 # Load library
-lib = Libdl.dlopen("../../../../philippides_J2C/workR/build/libProject_user.so")
+lib = Libdl.dlopen(joinpath(@__DIR__,"../../../../philippides_J2C/workR/build/libProject_user.so"))
 init_func       = Libdl.dlsym(lib, :init)
 free_func       = Libdl.dlsym(lib, :free_resources)
 
@@ -101,7 +101,7 @@ Second_part = false
 #######################################################
 #################### C FILES INITS ####################
 #######################################################
-cd("../../../../philippides_J2C/workR/build") do
+cd(joinpath(@__DIR__,"../../../../philippides_J2C/workR/build")) do
     call_init()
 end
 
@@ -367,6 +367,6 @@ else
     end
 end
 
-cd("../../../../philippides_c/workR/build") do
+cd(joinpath(@__DIR__,"../../../../philippides_J2C/workR/build")) do
     call_free_resources()
 end

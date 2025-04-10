@@ -6,7 +6,8 @@ lib = Libdl.dlopen("./build/libProject_user.so")
 # Get function symbols
 init_func       = Libdl.dlsym(lib, :init)
 free_func       = Libdl.dlsym(lib, :free_resources)
-
+philippides_func = Libdl.dlsym(lib, :philippides)
+get_res_func    = Libdl.dlsym(lib, :get_philippides_results)
 
 # Now call with function pointers
 

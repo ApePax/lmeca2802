@@ -15,7 +15,7 @@ const SY = DI.Symbolic
 
 using Libdl
 # Load library
-lib = Libdl.dlopen("../../../../philippides_J2C/workR/build/libProject_user.so")
+lib = Libdl.dlopen(joinpath(@__DIR__, "../../../../philippides_J2C/workR/build/libProject_user.so"))
 philippides_func = Libdl.dlsym(lib, :philippides)
 get_res_func    = Libdl.dlsym(lib, :get_philippides_results)
 function call_philippides(x::Vector{Float64})
@@ -96,15 +96,14 @@ function system(;
         q, q̇ = fill_state!(x)
         q_ref = SVector{1,Float64}(0.0)
         results = []
-        cd("../../../../philippides_J2C/workR/build") do
+        cd(joinpath(@__DIR__,"../../../../philippides_J2C/workR/build")) do
             x = [q...,q̇...,u...,q_ref...]
             call_philippides(x)
             res = get_results()
             push!(results,res...)
         end        
 
-        x_next = SVector{6,Float64}(results[1:3]...,results[5:7]...)
-        println(x_next)
+        x_next = SVector{6}(results[1:3]...,results[5:7]...)
         return x_next
     end
     # Define state space (bounds should be set according to your robot's joint limits)
