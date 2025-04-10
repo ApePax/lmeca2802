@@ -126,17 +126,6 @@ void free_resources() {
 
 // Main function (not used)
 int main(int argc, char const *argv[]) {
-    // Initialize the MBS model and data
-    init();
-
-    // Example: Call philippides() with initial conditions
-    double initial_conditions[20] = {1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 
-                                     7.7, 8.8, 9.9, 10.0, 11.1, 12.2, 
-                                     13.3, 14.4, 15.5, 16.6,17.7,18.8,19.9,20.0};
-    philippides(initial_conditions);
-
-    // Free allocated resources
-    free_resources();
-
+    // Not used
     return 0;
 }
