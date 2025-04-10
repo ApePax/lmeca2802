@@ -159,6 +159,22 @@ int main(int argc, char const *argv[])
     free_viscoelastic_coulomb();
     free_hunt_crossley_hertz();
 
+    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+     *              Return Results                               *
+     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+    double res[6];
+
+    // Example: fill res[] with values from a computation
+    res[0] = 42.0;
+    res[1] = 3.14159;
+    res[2] = -7.5;
+    res[3] = 0.00123;
+    res[4] = 9999.99;
+    res[5] = 123456.789;
+
+    printf("%.15lf %.15lf %.15lf %.15lf %.15lf %.15lf\n", res[0], res[1], res[2], res[3], res[4], res[5]);
+
+
     return 0;
 }
 

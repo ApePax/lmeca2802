@@ -1,0 +1,9 @@
+/home/mmorabito/.robotran/lmeca2802/philippides_J2C/workR/build/CMakeFiles/install/strip.dir
+/home/mmorabito/.robotran/lmeca2802/philippides_J2C/workR/build/CMakeFiles/install/local.dir
+/home/mmorabito/.robotran/lmeca2802/philippides_J2C/workR/build/CMakeFiles/edit_cache.dir
+/home/mmorabito/.robotran/lmeca2802/philippides_J2C/workR/build/CMakeFiles/Project_symbolic.dir
+/home/mmorabito/.robotran/lmeca2802/philippides_J2C/workR/build/CMakeFiles/install.dir
+/home/mmorabito/.robotran/lmeca2802/philippides_J2C/workR/build/CMakeFiles/list_install_components.dir
+/home/mmorabito/.robotran/lmeca2802/philippides_J2C/workR/build/CMakeFiles/rebuild_cache.dir
+/home/mmorabito/.robotran/lmeca2802/philippides_J2C/workR/build/CMakeFiles/exe_philippides_c.dir
+/home/mmorabito/.robotran/lmeca2802/philippides_J2C/workR/build/CMakeFiles/Project_user.dir
