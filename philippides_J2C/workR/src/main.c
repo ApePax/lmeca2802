@@ -58,20 +58,20 @@ void philippides(double x[20]) {
     mbs_data->q[Tx_boom_id] = x[0];
     mbs_data->q[Tz_boom_id] = x[1];
     mbs_data->q[R_lh_id] = x[2];
-    mbs_data->q[R_lk_id] = x[3];
-    mbs_data->q[R_lf_id] = x[4];
-    mbs_data->q[R_rh_id] = x[5];
-    mbs_data->q[R_rk_id] = x[6];
+    mbs_data->q[R_rh_id] = x[3];
+    mbs_data->q[R_lk_id] = x[4];
+    mbs_data->q[R_rk_id] = x[5];
+    mbs_data->q[R_lf_id] = x[6];
     mbs_data->q[R_rf_id] = x[7];
 
     // Set the velocities
     mbs_data->qd[Tx_boom_id] = x[8];
     mbs_data->qd[Tz_boom_id] = x[9];
     mbs_data->qd[R_lh_id] = x[10];
-    mbs_data->qd[R_lk_id] = x[11];
-    mbs_data->qd[R_lf_id] = x[12];
-    mbs_data->qd[R_rh_id] = x[13];
-    mbs_data->qd[R_rk_id] = x[14];
+    mbs_data->qd[R_rh_id] = x[11];
+    mbs_data->qd[R_lk_id] = x[12];
+    mbs_data->qd[R_rk_id] = x[13];
+    mbs_data->qd[R_lf_id] = x[14];
     mbs_data->qd[R_rf_id] = x[15];
 
     // Set Inputs
@@ -86,7 +86,7 @@ void philippides(double x[20]) {
     mbs_dirdyn = mbs_new_dirdyn(mbs_data);
 
     mbs_dirdyn->options->dt0 = 1e-3;
-    mbs_dirdyn->options->tf = 5.0;
+    mbs_dirdyn->options->tf = 1e-1;
     mbs_dirdyn->options->save2file = 0; // 1
     mbs_dirdyn->options->verbose = 0;
     
@@ -98,12 +98,12 @@ void philippides(double x[20]) {
 
     // Store results (positions and velocities)
     philippides_results[0] = mbs_data->q[R_lh_id];     
-    philippides_results[1] = mbs_data->q[R_lk_id];  
-    philippides_results[2] = mbs_data->q[R_rh_id];  
+    philippides_results[1] = mbs_data->q[R_rh_id];  
+    philippides_results[2] = mbs_data->q[R_lk_id];  
     philippides_results[3] = mbs_data->q[R_rk_id];
     philippides_results[4] = mbs_data->qd[R_lh_id];     
-    philippides_results[5] = mbs_data->qd[R_lk_id];  
-    philippides_results[6] = mbs_data->qd[R_rh_id];  
+    philippides_results[5] = mbs_data->qd[R_rh_id];  
+    philippides_results[6] = mbs_data->qd[R_lk_id];  
     philippides_results[7] = mbs_data->qd[R_rk_id];  
 }
 

@@ -13,90 +13,32 @@ const PB = DI.Problem
 const ST = DI.System
 const SY = DI.Symbolic
 
-# include the tools for the simulator from src
-include(joinpath(@__DIR__, "..", "src", "RS_tools.jl"))
-import .RS_tools
-
-function get_visualization_tool(;
-    robot_urdf = joinpath(@__DIR__, "..", "deps/ZMP_2DBipedRobot_nodamping.urdf"),
-)
-    # Construct the robot in the simulation engine 
-    rs = RS_tools.RobotSimulator(;
-        fileName = robot_urdf,
-        symbolic = false,
-        add_contact_points = true,
-        add_gravity = true,
-        add_flat_ground = true, # TODO ->true
-    )
-    vis = RS_tools.set_visulalizer(; mechanism = rs.mechanism, fileName = robot_urdf)
-    return rs, vis
+using Libdl
+# Load library
+lib = Libdl.dlopen("../../../../philippides_J2C/workR/build/libProject_user.so")
+philippides_func = Libdl.dlsym(lib, :philippides)
+get_res_func    = Libdl.dlsym(lib, :get_philippides_results)
+function call_philippides(x::Vector{Float64})
+    ccall(philippides_func, Cvoid, (Ptr{Float64},), x)
 end
+function get_results()
+    res = Vector{Float64}(undef, 8)
+    ccall(get_res_func, Cvoid, (Ptr{Float64},), res)
+    return res
+end
+
+# include the tools for the simulator from src
 
 function system(;
     tstep = 5e-1,
     robot_urdf = joinpath(@__DIR__, "..", "deps/ZMP_2DBipedRobot_nodamping.urdf"),
 )
-    rs = RS_tools.RobotSimulator(;
-        fileName = robot_urdf,
-        symbolic = false,
-        add_contact_points = true,
-        add_gravity = true,
-        add_flat_ground = true,
-    )
-
-    mechanism = rs.mechanism
-    state = MechanismState(mechanism)
-    n_pos = num_positions(state)
-    n_vel = num_velocities(state)
-    Δt_simu = 1e-4       # Simulation step 
-    Δt_dionysos = tstep      # Dinoysos time discretisation, nominal 50Hz (control freq of the material robot)
-
-    println("n_pos: ", n_pos)
-    println("n_vel: ", n_vel)
-
-    ## MOTOR Parameters ##
-    HGR = 353.5                 # Hip gear-ratio
-    KGR = 212.6                 # Knee gear-ratio
-    ktp  = 0.395/HGR            # Torque constant with respect to the voltage [Nm/V] 
-    Kvp  = 1.589/(HGR*HGR)      # Viscous friction constant [Nm*s/rad] (linked to motor speed)
-    τc_u  = 0.065/HGR           # Dry friction torque [Nm]
-    GR = [HGR, HGR, KGR, KGR]   # Gear ratios
-    Kp = 900.0 / 128.0          # DXL controller gain
-    τ_m = [0.0,0.0,0.0,0.0]
-    # Discrete time using Rigibodydynamics simulator -> returns (X[i], U[i]) -> X[i+1]
-    function voltage_controller!(
-        u::SVector,
-        q_ref::SVector
-    )
-        ddl = 2
-        function controller!(τ, t, state)
-            τ .= 0
-
-            current_q = configuration(state)[(end - 3 - ddl):(end - ddl)]
-            current_̇q = velocity(state)[(end - 3 - ddl):(end - ddl)]
-            ω = current_̇q .* GR
-
-            # DXL controller on the right knee
-            PWM = (q_ref .- current_q[4]) .* (4095.0/(2π)* Kp) # Only true because profile acceleration and profile velocity are null
-            PWM_sat = clamp.(PWM, -885.0, 885.0)# Apply_saturation
-            u_K = PWM_sat .* (12.0 / 885.0)
-
-            # The remaining motors are controlled in voltage for the simulation
-            U_tot = [u..., u_K...]
-
-            τ_0 = U_tot .* GR .* ktp .- ω .* GR .* Kvp
-            τ_m .= τ_0 .- sign.(ω) .* GR .* τc_u
-            τ[(end - 3 - ddl):(end - ddl)] .= τ_m
-            return nothing
-        end
-    end
-
     ## Robots Parameters ##
     Lthigh = 0.20125
     Lleg = 0.172
     Hip_offset = 0.04025
     Foot_height = 0.009
-    Init_offset = -0.0006559432
+    Init_offset = 0.0 # Was only valid when using Juliarobotics
 
     function fill_state!(x)
         # Create q
@@ -152,20 +94,16 @@ function system(;
 
         # First step: fill state: from the n state variables -> 8 positions and 8 speeds
         q, q̇ = fill_state!(x)
-        q_ref = SVector{1}(0.0)
+        q_ref = SVector{1,Float64}(0.0)
+        results = []
+        cd("../../../../philippides_J2C/workR/build") do
+            x = SVector{20,Float64}(q...,q̇...,u...,q_ref...)
+            call_philippides(x)
+            res = get_results()
+            push!(results,res)
+        end        
 
-        # Second step: set the mechanism in that configuration
-        set_configuration!(state, q)
-        set_velocity!(state, q̇)
-
-        # Third step: get next state
-        controller! = voltage_controller!(u, q_ref)
-        ts, qs, vs =
-            RigidBodyDynamics.simulate(state, Δt_dionysos, controller!; Δt = Δt_simu)
-        x_next = SVector{length(x)}(qs[end][3:5]..., vs[end][3:5]...)
-        # Note: qs and vs are vectors of speed and position for every step of the simulation (i.e. every Δt = 1e-4)
-        # Only the final states are useful in our case
-
+        x_next = SVector{6,Float64}(results[1:3]...,results[5:7]...)
         return x_next
     end
     # Define state space (bounds should be set according to your robot's joint limits)

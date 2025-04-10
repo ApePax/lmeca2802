@@ -15,10 +15,43 @@ const AB = OP.Abstraction
 include(
     joinpath(
         dirname(dirname(pathof(Dionysos))),
-        "problems/Biped_robot/Simplified_problem",
+        "problems/Biped_robot/J2C_problem",
         "robot_problem.jl",
     ),
 )
+
+using Libdl
+# Load library
+lib = Libdl.dlopen("../../../../philippides_J2C/workR/build/libProject_user.so")
+init_func       = Libdl.dlsym(lib, :init)
+free_func       = Libdl.dlsym(lib, :free_resources)
+
+function call_init()
+    ccall(init_func, Cvoid, ())
+end
+function call_free_resources()
+    ccall(free_func, Cvoid, ())
+end
+
+# Now call with function pointers
+
+function call_init()
+    ccall(init_func, Cvoid, ())
+end
+
+function call_philippides(x::Vector{Float64})
+    ccall(philippides_func, Cvoid, (Ptr{Float64},), x)
+end
+
+function call_free_resources()
+    ccall(free_func, Cvoid, ())
+end
+
+function get_results()
+    res = Vector{Float64}(undef, 8)
+    ccall(get_res_func, Cvoid, (Ptr{Float64},), res)
+    return res
+end
 
 function get_abstract_closed_loop_trajectory(abstract_system, abstract_controller, source, nstep; stopping = (s)->false)
     state_traj, input_traj = [source], []
@@ -60,10 +93,17 @@ end
 ################### File Parameters ###################
 #######################################################
 filename_save = joinpath(@__DIR__, "Abstraction_solver.jld2")
-do_empty_optim = false
+do_empty_optim = true
 verify_save = false
 First_part = false
-Second_part = true
+Second_part = false
+
+#######################################################
+#################### C FILES INITS ####################
+#######################################################
+cd("../../../../philippides_J2C/workR/build") do
+    call_init()
+end
 
 #######################################################
 ################### Optim Parameters ##################
@@ -325,4 +365,8 @@ else
         println()
         
     end
+end
+
+cd("../../../../philippides_c/workR/build") do
+    call_free_resources()
 end
