@@ -45,15 +45,15 @@ int COLUMNS = 5; // time,q1_l,q1_r,q2_l,q2_r -> 5 columns
 
 int main(int argc, char const *argv[])
 {
-    mbs_msg("Starting philippides MBS project!\n");
+    //mbs_msg("Starting philippides MBS project!\n");
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
      *                     LOADING                               *
      * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
     MbsData *mbs_data;
 
-    mbs_msg("Loading the philippides data file !\n");
+    //mbs_msg("Loading the philippides data file !\n");
     mbs_data = mbs_load("philippides_c.mbs");
-    mbs_msg("*.mbs file loaded!\n");
+    //mbs_msg("*.mbs file loaded!\n");
 
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
      *            Structures Initialisations                     *
@@ -73,7 +73,7 @@ int main(int argc, char const *argv[])
     mbs_part = mbs_new_part(mbs_data);
 
     mbs_part->options->rowperm=1;
-    mbs_part->options->verbose = 1;
+    mbs_part->options->verbose = 0;
 
     mbs_run_part(mbs_part, mbs_data);
 
@@ -90,6 +90,7 @@ int main(int argc, char const *argv[])
     // dirdyn options (see documentations for additional options)
     mbs_dirdyn->options->dt0 = 1e-3;
     mbs_dirdyn->options->tf  = 10.0;
+    mbs_dirdyn->options->verbose = 0;
     mbs_dirdyn->options->save2file = 0;
     //mbs_dirdyn->options->realtime = 1;
 
