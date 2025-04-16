@@ -27,6 +27,7 @@ Contact : info@robotran.be
 """
 import numpy as np
 import cProfile
+import time
 # %%===========================================================================
 # Packages loading
 # =============================================================================
@@ -56,7 +57,7 @@ mbs_data.frequency = 50
 # =============================================================================
 mbs_data.process = 1
 mbs_part = Robotran.MbsPart(mbs_data)
-mbs_part.set_options(rowperm=1, verbose=1)
+mbs_part.set_options(rowperm=1, verbose=0)
 mbs_part.run()
 """
 # =============================================================================
@@ -81,8 +82,12 @@ mbs_modal.run()
 # =============================================================================
 mbs_data.process = 3
 mbs_dirdyn = Robotran.MbsDirdyn(mbs_data)
-mbs_dirdyn.set_options(dt0=1e-3, tf=8, save2file=0.1)
+mbs_dirdyn.set_options(dt0=1e-4, tf=20, save2file=0)
+
+start = time.perf_counter()
 cProfile.run('mbs_dirdyn.run()', 'profiler_output.prof')
+end = time.perf_counter()
+print(f"Function took {end-start:.6f} seconds")
 
 """
 # =============================================================================

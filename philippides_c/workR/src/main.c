@@ -22,6 +22,7 @@
     */
 
 #include <stdio.h>
+#include <time.h>
 
 #include "mbs_data.h"
 #include "mbs_part.h"
@@ -89,12 +90,15 @@ int main(int argc, char const *argv[])
 
     // dirdyn options (see documentations for additional options)
     mbs_dirdyn->options->dt0 = 1e-3;
-    mbs_dirdyn->options->tf  = 10.0;
+    mbs_dirdyn->options->tf  = 20.0;
     mbs_dirdyn->options->verbose = 0;
     mbs_dirdyn->options->save2file = 0;
     //mbs_dirdyn->options->realtime = 1;
-
+    clock_t start = clock();
     mbs_run_dirdyn(mbs_dirdyn, mbs_data);
+    clock_t end = clock();
+    double time_taken = (double) (end-start) / CLOCKS_PER_SEC;
+    printf("Function took %.3f seconds to execute \n", time_taken);
 
     mbs_delete_dirdyn(mbs_dirdyn, mbs_data);
     
