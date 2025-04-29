@@ -196,9 +196,9 @@ Model = 0
 # lambda = 3/2 * k * alpha = k * d => d = 3/2 *alpha
 # Xing [5e4 , 1.5 , 0.3]
 # Brieuc [1e4, 1.5, 3.3]
-k = 1e4       # Stiffness coefficient
+k = 5e4       # Stiffness coefficient
 n = 1.5       # Nonlinearity exponent (3/2 for Hertzian contact)
-d = 3.3       # Damping coefficient
+d = 0.3       # Damping coefficient
 hch_model = HuntCrossleyHertz(k, n, d)
 
 # Instantiate a ViscoElastic Coulomb model

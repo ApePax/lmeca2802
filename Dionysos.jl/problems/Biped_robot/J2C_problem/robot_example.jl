@@ -92,11 +92,11 @@ end
 #######################################################
 ################### File Parameters ###################
 #######################################################
-filename_save = joinpath(@__DIR__, "Abstraction_solver.jld2")
-do_empty_optim = true
+filename_save = joinpath(@__DIR__, "Abstraction_solverv2.jld2")
+do_empty_optim = false
 verify_save = false
-First_part = false
-Second_part = false
+First_part = true
+Second_part = true
 
 #######################################################
 #################### C FILES INITS ####################
@@ -222,14 +222,14 @@ else
         );
         println(control_trajectory)
         println()
-
+        """
         for k in 1:ST.length(control_trajectory)
             concrete_state = ST.get_state(control_trajectory, k)
             abstract_state = SY.get_abstract_state(abstract_system, concrete_state)
             println(abstract_state)
         end
         println()
-
+        """
         nstep = 300 # correspond to 30 sec
         function reached_abstract(x)
             if x ∈ abstract_problem.target_set
@@ -240,7 +240,7 @@ else
         end
 
         #######################################################
-        ################# Abstract Trajectory #################
+        ############### Closed-loop Trajectory ################
         #######################################################
         abstract_system = MOI.get(optimizer, MOI.RawOptimizerAttribute("abstract_system"))
         abstract_init_set = Dionysos.Symbolic.get_abstract_state(abstract_system, x0)
@@ -267,12 +267,12 @@ else
         file = jldopen(filename_save, "r")
         reloaded_solver = file["my_abstraction_solver"]
         MOI.set(optimizer, MOI.RawOptimizerAttribute("abstraction_solver"), reloaded_solver)
-        optimizer.handle_out_of_domain = 2
+        optimizer.handle_out_of_domain = 1
 
         #######################################################
         ################# Problem definition ##################
         #######################################################
-        p0 = SVector{n_state,Float64}([-0.15352800685754736, 0.11944498327439435, 0.21311298746900986, 0.0, 0.0, 0.0])
+        p0 = SVector{n_state,Float64}([-0.13973903349563527, 0.12465164214506708, 0.18272715732388645, 0.0, 0.0, 0.0])
         _I_ = UT.HyperRectangle(p0, p0)
 
         t_low = SVector{n_state,Float64}([-1.1*π/180.0, -1.1*π/180.0, -1.1*π/180.0, -0.75, -0.3, -0.3])

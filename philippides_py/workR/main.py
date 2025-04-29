@@ -82,7 +82,7 @@ mbs_modal.run()
 # =============================================================================
 mbs_data.process = 3
 mbs_dirdyn = Robotran.MbsDirdyn(mbs_data)
-mbs_dirdyn.set_options(dt0=1e-4, tf=20, save2file=0)
+mbs_dirdyn.set_options(dt0=1e-3, tf=20.0, save2file=1)
 
 start = time.perf_counter()
 cProfile.run('mbs_dirdyn.run()', 'profiler_output.prof')
