@@ -17,7 +17,7 @@ class trajectory:
         self.trajectory = tab
         self.i = 0
  
-tab = np.loadtxt('../Walking_Patterns/WP.csv', skiprows=1, usecols=range(5), delimiter=',')
+tab = np.loadtxt('../Walking_Patterns/WP_Dionysos_trajectory.csv', skiprows=1, usecols=range(5), delimiter=',')
 reference_trajectory = trajectory(tab)
 
 def user_JointForces(mbs_data, tsim):

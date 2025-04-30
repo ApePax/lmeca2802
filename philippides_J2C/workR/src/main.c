@@ -49,7 +49,7 @@ void init() {
 }
 
 // Function to compute dynamics with given initial conditions
-double philippides_results[8];
+double philippides_results[16];
 void philippides(double x[20]) {
     // Instantiate useful structures
     init_contact_manager(11);
@@ -97,19 +97,28 @@ void philippides(double x[20]) {
     free_contact_manager();
 
     // Store results (positions and velocities)
-    philippides_results[0] = mbs_data->q[R_lh_id];     
-    philippides_results[1] = mbs_data->q[R_rh_id];  
-    philippides_results[2] = mbs_data->q[R_lk_id];  
-    philippides_results[3] = mbs_data->q[R_rk_id];
-    philippides_results[4] = mbs_data->qd[R_lh_id];     
-    philippides_results[5] = mbs_data->qd[R_rh_id];  
-    philippides_results[6] = mbs_data->qd[R_lk_id];  
-    philippides_results[7] = mbs_data->qd[R_rk_id];  
+    philippides_results[0] = mbs_data->q[Tx_boom_id];
+    philippides_results[1] = mbs_data->q[Tz_boom_id]; 
+    philippides_results[2] = mbs_data->q[R_lh_id];     
+    philippides_results[3] = mbs_data->q[R_rh_id];  
+    philippides_results[4] = mbs_data->q[R_lk_id];  
+    philippides_results[5] = mbs_data->q[R_rk_id];
+    philippides_results[6] = mbs_data->q[R_lf_id];
+    philippides_results[7] = mbs_data->q[R_rf_id];
+
+    philippides_results[8] = mbs_data->qd[Tx_boom_id];
+    philippides_results[9] = mbs_data->qd[Tz_boom_id]; 
+    philippides_results[10] = mbs_data->qd[R_lh_id];     
+    philippides_results[11] = mbs_data->qd[R_rh_id];  
+    philippides_results[12] = mbs_data->qd[R_lk_id];  
+    philippides_results[13] = mbs_data->qd[R_rk_id];
+    philippides_results[14] = mbs_data->qd[R_lf_id];
+    philippides_results[15] = mbs_data->qd[R_rf_id]; 
 }
 
 // Function to get the results from the philippides function
 void get_philippides_results(double *results) {
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < 16; i++) {
         results[i] = philippides_results[i];
     }
 }

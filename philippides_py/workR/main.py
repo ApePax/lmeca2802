@@ -49,7 +49,7 @@ print(mbs_data.extforce_id)
 # Moved to user_jointForces 
 # TODO: l'interfacer proprement
 # mbs_data.reference_trajectory = np.loadtxt('../Walking_Patterns/WP.csv', skiprows=1, usecols=range(5), delimiter=',')
-mbs_data.frequency = 50
+mbs_data.frequency = 10
 
 
 # %%===========================================================================
@@ -82,7 +82,7 @@ mbs_modal.run()
 # =============================================================================
 mbs_data.process = 3
 mbs_dirdyn = Robotran.MbsDirdyn(mbs_data)
-mbs_dirdyn.set_options(dt0=1e-3, tf=20.0, save2file=1)
+mbs_dirdyn.set_options(dt0=1e-3, tf=3.799, save2file=1)
 
 start = time.perf_counter()
 cProfile.run('mbs_dirdyn.run()', 'profiler_output.prof')
