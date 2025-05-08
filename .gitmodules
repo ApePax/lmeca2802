@@ -1,0 +1,3 @@
+[submodule "Digital-Twin"]
+	path = Digital-Twin
+	url = https://github.com/AmerijckxCedric/Digital-Twin.git
