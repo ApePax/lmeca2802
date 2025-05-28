@@ -45,7 +45,7 @@ git pull
 This chapter covers basic position control simulations for the 5-link planar robot. This position controller is included in the Dynamixels motors by the manufacturer:<br>
 <img src=".README/IMAGES/DXL_controller_implemented.png" alt="DXL Position controller" width="600"/> <br>
 The controller outputs a tension, which is converted to torque using the following DC motor model (at the motor level): <br>
-$$\tau = k'_t u_a - (\tau_c + K'_v \dot{q})$$
+$$\tau = k'_t u_a - (\tau_c + K'_v \dot{q})$$ <br>
 The implemented formula is slightly different as the torques need to be at the joint levels, introducing the gear ratios in the formula.
 
 #### 1.1 JuliaRobotics
