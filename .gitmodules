@@ -1,6 +1,0 @@
-[submodule "Digital-Twin"]
-	path = Digital-Twin
-	url = https://github.com/AmerijckxCedric/Digital-Twin.git
-[submodule "Dionysos.jl"]
-	path = Dionysos.jl
-	url = https://github.com/dionysos-dev/Dionysos.jl.git
