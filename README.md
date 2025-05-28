@@ -86,15 +86,15 @@ TODO
 ### 2. Abstraction-Based Control Environments
 TODO
 
-#### 2.1 JuliaRobotics + Dionysos.jl
+#### 2.1 JuliaRobotics + Dionysos.jl (`Dionysos.jl`)
 TODO
 
-#### 2.2 Robotran + Dionysos.jl (`philippides_J2C`)
+#### 2.2 Robotran + Dionysos.jl (`philippides_J2C` and `Dionysos.jl`)
 TODO
 
 
 ## 👤 Authors
 
-Developed by **[Cédric Amerijckx, Maxime Morabito]**
+Developed by **[Cédric Amerijckx, Maxime Morabito, Antonin Perilleux]**
 
 Abstraction-based control library `Dionysos.jl` developed by **Julien Calbert**.
