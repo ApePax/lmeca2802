@@ -74,29 +74,23 @@ As explained in our master thesis, feeding the voltages measured on the physical
 
 #### 1.2 Robotran
 The folders `Robotran_c/` and `Robotran_py/` follow a similar implementation to `JuliaRobotics/`, but uses MBS files instead of URDF. The python version is used for feature development dur to is ease for debugging, while the c implementation is used for its computation speed capabilities. Both implementations follow the same structure. The main folders are:
-- `dataR/`
-- `resultR/`
-- `symbolicR/`
-- `userfctR/`
-- `WalkingPatterns/`
-- `workR/`
+- `dataR/`: contains the mbs file of the robot. Note that if a modification is applied to the mbs, the symbolic files need to be updated (via the MBSysPad).
+- `resultR/`: contains the results of the simulations.
+- `userfctR/`: contains the code for the simulation. The used_DrivenJoints, user_ExtForces and usedJointForces are respectively used to drive joints (for isntance to zero for the hip), to apply external forces (ground contact) and to apply torques or forces at the joint level (motor torques).
+- `WalkingPatterns/`: contains the position trajectories to follow.
+- `workR/`: runs the code.
 
+TODO
 
 
 ### 2. Abstraction-Based Control Environments
-
-This chapter covers advanced control using state-space abstraction and controller synthesis.
+TODO
 
 #### 2.1 JuliaRobotics + Dionysos.jl
-
-- Leverages `Dionysos.jl` for abstraction-based synthesis.
-- Potential integration with JuliaRobotics for simulation (to be detailed if implemented).
+TODO
 
 #### 2.2 Robotran + Dionysos.jl (`philippides_J2C`)
-
-- Combines Robotran dynamics with `Dionysos.jl` for controller synthesis.
-- `philippides_J2C` acts as the bridge between the dynamic model and the abstract controller.
-
+TODO
 
 
 ## 👤 Authors
