@@ -196,26 +196,24 @@ function controller_voltage_input_file(
     Kvp  = 1.589/(HGR*HGR)      # Viscous friction constant [Nm*s/rad] (linked to motor speed)
     τc_u  = 0.065/HGR           # Dry friction torque [Nm]
 
-    # Two two first torques are related to the boom and should always be controller to zero
-    # The two last torques are related to the feet and should also be controlled to zero
+    # Two two first torques are related to the boom and should always be set to zero
+    # The two last torques are related to the feet and should also be set to zero
     # The only torques changed by the controller are the four in the middle (Left hip, right hip, left knee, right knee)
     temp_τ = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
     temp_u = [0.0,0.0,0.0,0.0]
 
     function controller!(τ, t, state)
         ddl = 2 # Non-actuated joints at each side of the actuated joints 
-        # The values are only changed at the simulation frequency
-        # This is needed since the function simulate of RigidBody dynamic will iterate twice faster as it uses pre-calculation
         current_̇q = velocity(state)[(end - 3 - ddl):(end - ddl)]
         current_q = configuration(state)[(end - 3 - ddl):(end - ddl)]
 
-        if (t >= sim_index * Δt_file && t < time)
+        # Get voltages to apply, and saves results
+        if (t >= sim_index * Δt_file && t < time) # To do it at the file frequency
 
             open(filename, "r") do file
                 lines = readlines(file)                                         
                 line = split(lines[sim_index+1] , " ")
-                # Line = time τ_LH τ_RH τ_LK τ_RK
-                # We only change the torques of the hips and the knees                                 
+                # Line = time τ_LH τ_RH τ_LK τ_RK                            
                 temp_u .= parse.(Float64, line[2:end])                                         
             end
             if(write_in_folder)
@@ -228,13 +226,12 @@ function controller_voltage_input_file(
             end
             sim_index += 1
         end
-        
-        # τ needs to be [0 0 τ_LH τ_RH τ_LK τ_RK 0 0]
         ω = current_̇q .* [HGR, HGR, KGR, KGR]
 
+        # τ needs to be [0 0 τ_LH τ_RH τ_LK τ_RK 0 0]
         τ_0 = temp_u .* [HGR, HGR, KGR, KGR] .* ktp  .- ω .* [HGR, HGR, KGR, KGR] .* Kvp
         τ_m = τ_0 .- sign.(ω) .* [HGR, HGR, KGR, KGR] .* τc_u
-        temp_τ[(end - 3 - ddl):(end - ddl)] .= τ_m
+        temp_τ[(end - 3 - ddl):(end - ddl)] .= τ_m # Only applies torques at the hips and knees
         τ .= temp_τ
 
         return nothing
@@ -343,13 +340,12 @@ function dynamixel_controller(
             #----------------------------------------------------------------------------
             ω .= current_̇q .* [HGR, HGR, KGR, KGR]
             i .= (u .- (ω .* kt)) ./ R
-
-            # Simple torque model : τ = kϕ * i
             
             τ_0 = u .* [HGR, HGR, KGR, KGR] .* ktp  .- ω .* [HGR, HGR, KGR, KGR] .* Kvp
             τ_m .= τ_0 .- sign.(ω) .* [HGR, HGR, KGR, KGR] .* τc_u
             temp_τ[(end - 3 - ddl):(end - ddl)] .= τ_m
 
+            # Save results
             if(write_in_folder && t >= δt_file*prev_file_index)
                 open(joinpath(folder_save, "Current.txt"), "a") do file 
                     write(file, join([t,i...], " ") * "\n") 

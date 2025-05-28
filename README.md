@@ -80,8 +80,21 @@ The folders `Robotran_c/` and `Robotran_py/` follow a similar implementation to 
 - `WalkingPatterns/`: contains the position trajectories to follow.
 - `workR/`: runs the code.
 
-TODO
-
+This implemntation only allows for position control. To run the code:
+- In Python:
+```bash
+cd Robotran_py/workR/
+python3 main.py
+```
+- In C:
+```bash
+cd Robotran_c/workR/
+mkdir build
+cd build
+cmake .. -DCMAKE_PREFIX_PATH="~/.robotran/mbsysc/MBsysC/install
+make
+./exe_robotran_c
+```
 
 ### 2. Abstraction-Based Control Environments
 TODO

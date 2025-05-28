@@ -9,7 +9,7 @@
 # CMake for compiling a simple robotran project in C
 #
 # For us:
-# cmake .. -DCMAKE_PREFIX_PATH="~/.robotran/mbsysc/MBsysC/install"
+# cmake .. -DCMAKE_PREFIX_PATH="~/.robotran/mbsysc/MBsysC/install
 #
 # * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 #                       PROJECT MAIN CONFIGURATIONS
@@ -22,7 +22,7 @@ set(CMAKE_BUILD_TYPE Debug)
 
 # project name
 # MODIFIED /!\
-project (philippides_c C CXX)
+project (robotran_c C CXX)
 # ADDED /!\
 find_package(Threads REQUIRED)
 
