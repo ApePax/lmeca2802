@@ -79,6 +79,8 @@ The folders `Robotran_c/` and `Robotran_py/` follow a similar implementation to 
 - `userfctR/`: contains the code for the simulation. The used_DrivenJoints, user_ExtForces and usedJointForces are respectively used to drive joints (for isntance to zero for the hip), to apply external forces (ground contact) and to apply torques or forces at the joint level (motor torques).
 - `WalkingPatterns/`: contains the position trajectories to follow.
 - `workR/`: runs the code.
+In C there is an additionnal folder:
+- `structures/`: allows to access any structures from anywhere in the code, as long as it is defined in the structures.c and the structures.h. The CMakeFile has been modified accordingly. (/!\ follow the instruction in this code for new structures)
 
 This implemntation only allows for position control. To run the code:
 - In Python:
@@ -97,12 +99,20 @@ make
 ```
 
 ### 2. Abstraction-Based Control Environments
+Once the simulator has been tested with usual control techniques (ZMP), we can move on with a novel techique: abstraction-based control. As shown in the figure here below, we have to define a system and a problem. <br>
+<img src=".README/IMAGES/Dionysos.png" alt="Dionysos main principle" width="600"/> <br>
+ The system implementation is represented in the following figure: <br>
+<img src=".README/IMAGES/Closed_loop_S1.png" alt="System implemenation" width="600"/> <br>
+The folders we will work with are all the folders in `Dionysos.jl/problems/Biped_robot/`. For both simulators, two folders are available, to test Dionysos with its two possible working principle: a trajectory generator (used along with the Position Control Environment afterwards), or a controller generator. Note that the folder `Complete _ranges` has been created for completeness, but its computational complexity is way too high (more than a lifetime computation time).
+
+ Each of this folder will contain two files:
+- `robot_problem.jl`: contains the system definition. It includes the fill_state functions (State Extension) and either a call to JuliaRobotics either to Robotran. It also includes the system's state space and input space bounds. Note that this system is a simplified system and only contains 9 dimensions (compared to the 20 dimensions of the complete system).
+- `robot_example.jl`: contains the problem definition. In the case of trajectory generator validation, the asbtraction is first computed (and saved in the file `Abstraction.jld2` as it takes a lot of time to compute), and the controllers derived. The controllers are then tested on the simplified system to retrieve the trajectory. This implementation is finally validated with the Position Controller Environment (i.e. on the complete system). In the case of the controller validation, the controllers derived in the trajectory are used on the complete system, along with a memory to bypass the fill_state function. The controllers from the trajectory generation validation are saved in the files `First_step.jld2` and `Second_step.jld2`, by saving the whole optimizer in the corresponding folder. Note that some of the data of the optimizer can't be saved such as functions calls, and have to be re-defined in the folders controller validation.
+
+#### 2.1 Technical considerations : JuliaRobotics + Dionysos.jl (`Dionysos.jl`)
 TODO
 
-#### 2.1 JuliaRobotics + Dionysos.jl (`Dionysos.jl`)
-TODO
-
-#### 2.2 Robotran + Dionysos.jl (`philippides_J2C` and `Dionysos.jl`)
+#### 2.2 Technical considerations : Robotran + Dionysos.jl (`philippides_J2C` and `Dionysos.jl`)
 TODO
 
 
