@@ -25,9 +25,8 @@ In the same repository, clone the git:
 
 ```bash
 git pull
+git submodule update --init --recursive
 ```
-
-
 
 ## 📁 Folder Structure
 
@@ -35,8 +34,6 @@ git pull
 - `JuliaRobotics/`: Simulates the robot using motor position control, solved with **JuliaRobotics**.
 - `Robotran_c/` and `Robotran_py/`: Similar simulations to `JuliaRobotics/` using **Robotran** instead.
 - `Robotran_J2C/`: A modified version of `Robotran_c` adapted for integration with **Dionysos.jl**.
-
-
 
 ## 💡 More Specifically
 
