@@ -99,7 +99,7 @@ make
 Once the simulator has been tested with usual control techniques (ZMP), we can move on with a novel techique: abstraction-based control. As shown in the figure here below, we have to define a system and a problem. <br>
 <img src=".README/IMAGES/Dionysos.png" alt="Dionysos main principle" width="600"/> <br>
  The system implementation is represented in the following figure: <br>
-<img src=".README/IMAGES/Closed_loop_S1.png" alt="System implemenation" width="600"/> <br>
+<img src=".README/IMAGES/closed_loop_S1.png" alt="System implemenation" width="600"/> <br>
 The folders we will work with are all the folders in `Dionysos.jl/problems/Biped_robot/`. For both simulators, two folders are available, to test Dionysos with its two possible working principle: a trajectory generator (used along with the Position Control Environment afterwards), or a controller generator. Note that the folder `Complete _ranges` has been created for completeness, but its computational complexity is way too high (more than a lifetime computation time).
 
  Each of this folder will contain two files:
