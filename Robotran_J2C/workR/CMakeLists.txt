@@ -22,7 +22,7 @@ set(CMAKE_BUILD_TYPE Debug)
 
 # project name
 # MODIFIED /!\
-project (philippides_c C CXX)
+project (robotran_J2C C CXX)
 # ADDED /!\
 find_package(Threads REQUIRED)
 

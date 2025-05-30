@@ -8,7 +8,7 @@ This repository includes multiple simulation environments based on both **JuliaR
 
 - Linux
 - Git
-- Julia (recommended version: 1.10.2)
+- Julia (recommended version: 1.10.2 -> 1.11.2)
 - Robotran (for C/Python-based simulations)
 
 ## 📥 Installation

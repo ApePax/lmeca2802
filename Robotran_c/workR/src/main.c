@@ -92,7 +92,7 @@ int main(int argc, char const *argv[])
     mbs_dirdyn->options->dt0 = 1e-3;
     mbs_dirdyn->options->tf  = 20.0;
     mbs_dirdyn->options->verbose = 0;
-    mbs_dirdyn->options->save2file = 0;
+    mbs_dirdyn->options->save2file = 1;
     //mbs_dirdyn->options->realtime = 1;
     clock_t start = clock();
     mbs_run_dirdyn(mbs_dirdyn, mbs_data);
