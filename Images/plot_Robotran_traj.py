@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import math as math
 
-verbose = False
+verbose = True
 #----------------------------------------------------------------------------
 #                       Code PARAMETERS
 #----------------------------------------------------------------------------
@@ -25,11 +25,11 @@ else:
     columns_Robotran = {'Time': 0, 'R_lh': 1, 'R_rh': 2, 'R_lk': 3, 'R_rk': 4}
 columns_index_Robotran = [columns_Robotran['R_lh'], columns_Robotran['R_rh'], columns_Robotran['R_lk'], columns_Robotran['R_rk']]
 
-Simulation_file = "../data/Robotran/" + "trajectory" + "/" + "dirdyn_q.res"
-WP = "../../philippides_py/Walking_Patterns/WP_Dionysos_trajectory.csv"
+Simulation_file = "../Robotran_py/data/Robotran/" + "trajectory" + "/" + "dirdyn_q.res"
+WP = "../Robotran_py/Walking_Patterns/WP_Dionysos_Robotran_trajectory.csv"
 
-Simulation_file_D = "../data/Dionysos/" + "trajectory" + "/" + File + ".txt"
-WP_D = "../WalkingPatterns/Dionysos_trajectory.csv"
+Simulation_file_D = "../JuliaRobotics/data/Dionysos/" + "trajectory" + "/" + File + ".txt"
+WP_D = "../JuliaRobotics/WalkingPatterns/Dionysos_JR_trajectory.csv"
 
 
 save_folder = "Robotran_traj/"

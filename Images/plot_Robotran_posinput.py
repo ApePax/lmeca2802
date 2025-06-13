@@ -33,10 +33,10 @@ columns_index_Robotran = [columns_Robotran['R_lh'], columns_Robotran['R_rh'], co
 
 number_of_files = 4
 
-Simulation_file_p = "../data/simulation/" + "Prismatic" + "/" + File + ".txt"
-Simulation_file_r = "../../philippides_py/resultsR/" + dict_Robotran[File] + ".res"
-Robot_file = "../data/Robot_200Hz/Inputs/" + File + ".txt"
-WP = "../WalkingPatterns/ZMP.csv"
+Simulation_file_p = "../JuliaRobotisc/data/simulation/" + "Prismatic" + "/" + File + ".txt"
+Simulation_file_r = "../Robotran_py/resultsR/" + dict_Robotran[File] + ".res"
+Robot_file = "../Robot_data/Robot_200Hz/Inputs/" + File + ".txt"
+WP = "../Robotran_py/WalkingPatterns/ZMP.csv"
 
 save_folder = "Robotran/"
 

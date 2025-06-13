@@ -2,12 +2,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 import math as math
 
-verbose = False
+verbose = True
 #----------------------------------------------------------------------------
 #                       Code PARAMETERS
 #----------------------------------------------------------------------------
-File = "Voltage"
-y_units = "[V]"
+File = "Position"
+y_units = "[°]"
 
 #----------------------------------------------------------------------------
 #                       Folder DETAILS
@@ -20,10 +20,10 @@ else:
 
 number_of_files = 2
 
-Simulation_S0 = "../data/Dionysos/" + "controller" + "/" + File + "_S0" ".txt"
-Simulation_S1 = "../data/Dionysos/" + "controller" + "/" + File + "_S1" ".txt"
+Simulation_S0 = "../JuliaRobotics/data/Dionysos/" + "controller" + "/" + File + "_S0" ".txt"
+Simulation_S1 = "../JuliaRobotics/data/Dionysos/" + "controller" + "/" + File + "_S1" ".txt"
 
-save_folder = "Dionysos_controller/"
+save_folder = "JuliaRobotics_controller/"
 
 #----------------------------------------------------------------------------
 #                       Load DATA

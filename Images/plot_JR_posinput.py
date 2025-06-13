@@ -5,7 +5,7 @@ import math as math
 # this is file is only valid when the hybrid has been changed such that it moves in the same direction as the real robot
 # -> cfr line 278 in RobotSimulator.jl
 
-verbose = False
+verbose = True
 #----------------------------------------------------------------------------
 #                       Code PARAMETERS
 #----------------------------------------------------------------------------
@@ -20,15 +20,15 @@ columns_hybrid = [2, 1, 4, 3]
 
 number_of_files = 4
 
-Simulation_file_p = "../data/simulation/" + "Prismatic" + "/" + File + ".txt"
-Simulation_file_h = "../data/simulation/" + "Hybrid" + "/" + File + ".txt"
+Simulation_file_p = "../JuliaRobotics/data/" + "Prismatic" + "/" + File + ".txt"
+Simulation_file_h = "../JuliaRobotics/data/" + "Hybrid" + "/" + File + ".txt"
 if(File == "Torque"):
-    Robot_file = "../data/Robot_200Hz/Outputs/" + File + ".txt"
+    Robot_file = "../Robot_data/Robot_200Hz/Outputs/" + File + ".txt"
 else:
-    Robot_file = "../data/Robot_200Hz/Inputs/" + File + ".txt"
-WP = "../WalkingPatterns/ZMP.csv"
+    Robot_file = "../Robot_data/Robot_200Hz/Inputs/" + File + ".txt"
+WP = "../JuliaRobotics/WalkingPatterns/ZMP.csv"
 
-save_folder = "DigitalTwin/"
+save_folder = "JuliaRobotics/"
 
 #----------------------------------------------------------------------------
 #                       Load DATA

@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import math as math
 
-verbose = False
+verbose = True
 #----------------------------------------------------------------------------
 #                       Code PARAMETERS
 #----------------------------------------------------------------------------
@@ -16,10 +16,10 @@ columns_names = ["", "Left Hip", "Right Hip", "Left Knee", "Right Knee"]
 
 number_of_files = 4
 
-simu_R_S0 = "../data/Robotran/controller/Position_S0.txt"
-simu_R_S1 = "../data/Robotran/controller/Position_S1.txt"
-Simulation_S0 = "../data/Dionysos/controller/Position_S0.txt"
-Simulation_S1 = "../data/Dionysos/controller/Position_S1.txt"
+simu_R_S0 = "../Robotran_py/data/Robotran/controller/Position_S0.txt"
+simu_R_S1 = "../Robotran_py/data/Robotran/controller/Position_S1.txt"
+Simulation_S0 = "../JuliaRobotics/data/Dionysos/controller/Position_S0.txt"
+Simulation_S1 = "../JuliaRobotics/data/Dionysos/controller/Position_S1.txt"
 
 save_folder = "Robotran_controller/"
 

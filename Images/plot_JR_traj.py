@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import math as math
 
-verbose = False
+verbose = True
 #----------------------------------------------------------------------------
 #                       Code PARAMETERS
 #----------------------------------------------------------------------------
@@ -17,10 +17,10 @@ columns_names = ["", "Left Hip", "Right Hip", "Left Knee", "Right Knee"]
 
 number_of_files = 2
 
-Simulation_file = "../data/Dionysos/" + "trajectory" + "/" + File + ".txt"
-WP = "../WalkingPatterns/Dionysos_trajectory.csv"
+Simulation_file = "../JuliaRobotics/data/Dionysos/" + "trajectory" + "/" + File + ".txt"
+WP = "../JuliaRobotics/WalkingPatterns/Dionysos_JR_trajectory.csv"
 
-save_folder = "Dionysos_traj/"
+save_folder = "JuliaRobotics_traj/"
 
 #----------------------------------------------------------------------------
 #                       Load DATA
