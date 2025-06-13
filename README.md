@@ -28,12 +28,16 @@ git pull
 git submodule update --init --recursive
 ```
 
+
+
 ## 📁 Folder Structure
 
 - `Dionysos.jl/`: Library for abstraction-based controller synthesis, developed by **Julien Calbert**.
 - `JuliaRobotics/`: Simulates the robot using motor position control, solved with **JuliaRobotics**.
 - `Robotran_c/` and `Robotran_py/`: Similar simulations to `JuliaRobotics/` using **Robotran** instead.
 - `Robotran_J2C/`: A modified version of `Robotran_c` adapted for integration with **Dionysos.jl**.
+
+
 
 ## 💡 More Specifically
 
@@ -67,7 +71,8 @@ instantiate
 include("Simulator/simulation_controller.jl")
 exit()
 ```
-As explained in our master thesis, feeding the voltages measured on the physical robot in open-loop does not work in the current state, as the simulation is not able to reproduce the ZMP trajectory.
+As explained in our master thesis, feeding the voltages measured on the physical robot in open-loop does not work in the current state, as the simulation is not able to reproduce the ZMP trajectory.<br>
+Note that on the real robot, two motors are mounted in the other direction. This implies that their signals need to be multiplied by -1. The save order in the LabView also differs from the URDF index, implying the need to swicth some rows in the data obtained in the real robot.
 
 #### 1.2 Robotran
 The folders `Robotran_c/` and `Robotran_py/` follow a similar implementation to `JuliaRobotics/`, but uses MBS files instead of URDF. The python version is used for feature development dur to is ease for debugging, while the c implementation is used for its computation speed capabilities. Both implementations follow the same structure. The main folders are:
@@ -96,10 +101,10 @@ make
 ```
 
 ### 2. Abstraction-Based Control Environments
-Once the simulator has been tested with usual control techniques (ZMP), we can move on with a novel techique: abstraction-based control. As shown in the figure here below, we have to define a system and a problem. <br>
+Once the simulator has been tested with usual control techniques (ZMP), we can move on with a novel techique: abstraction-based control. As shown in the figure here below, we have to define a system and a problem. More information is available in the master thesis. <br>
 <img src=".README/IMAGES/Dionysos.png" alt="Dionysos main principle" width="600"/> <br>
  The system implementation is represented in the following figure: <br>
-<img src=".README/IMAGES/closed_loop_S1.png" alt="System implemenation" width="600"/> <br>
+<img src=".README/IMAGES/Closed_loop_S1.png" alt="System implemenation" width="600"/> <br>
 The folders we will work with are all the folders in `Dionysos.jl/problems/Biped_robot/`. For both simulators, two folders are available, to test Dionysos with its two possible working principle: a trajectory generator (used along with the Position Control Environment afterwards), or a controller generator. Note that the folder `Complete _ranges` has been created for completeness, but its computational complexity is way too high (more than a lifetime computation time).
 
  Each of this folder will contain two files:
@@ -107,14 +112,16 @@ The folders we will work with are all the folders in `Dionysos.jl/problems/Biped
 - `robot_example.jl`: contains the problem definition. In the case of trajectory generator validation, the asbtraction is first computed (and saved in the file `Abstraction.jld2` as it takes a lot of time to compute), and the controllers derived. The controllers are then tested on the simplified system to retrieve the trajectory. This implementation is finally validated with the Position Controller Environment (i.e. on the complete system). In the case of the controller validation, the controllers derived in the trajectory are used on the complete system, along with a memory to bypass the fill_state function. The controllers from the trajectory generation validation are saved in the files `First_step.jld2` and `Second_step.jld2`, by saving the whole optimizer in the corresponding folder. Note that some of the data of the optimizer can't be saved such as functions calls, and have to be re-defined in the folders controller validation.
 
 #### 2.1 Technical considerations : JuliaRobotics + Dionysos.jl (`Dionysos.jl`)
-TODO
+The folder `Dionysos.jl/problems/Biped_robot/Julia_Trajectory_obtention/` allows to obtain a position trajectory (`Dionysos_JR_trajectory.csv`), validated with the folder `JuliaRobotics` in position control. The controllers obtained are saved (`First_step.jld2` and `Second_step.jld2`), then validated in the folder `Julia_Controller_validation`. <br>
+The JuliaRobotics simulator is directly implemented in the folders. The URDF is available in the folder `Dionysos.jl/problems/Biped_robot/deps/`.
+
 
 #### 2.2 Technical considerations : Robotran + Dionysos.jl (`philippides_J2C` and `Dionysos.jl`)
-TODO
-
+The use of Robotran along with Dionysos is a little bit more challenging. First of all, it requires in Robotran a library (.so) instead of using an executable. This was implemented by modifying Robotran's CMakeList. The main also needs to be revised, as there is no main function, but only function that will be called from Dionysos through Julia. Those functions are init(), free() to handle the memory, as well as the philippides(x) function to run the simulation with x as (state,input) and get_results_() to retrieve the results. <br>
+Concerning Dionysos, the codes are nearly the sames as in Julia. They differ on the initialisation and the free handling the structures memory in C, called in the `robot_exemples.jl`. The philippides and get_results functions are called in `robot_problem.jl`.
 
 ## 👤 Authors
 
-Developed by **[Cédric Amerijckx, Maxime Morabito, Antonin Perilleux]**
+Developed by **[Cédric Amerijckx, Maxime Morabito]**, with the help of **[Antonin Perilleux]**.
 
 Abstraction-based control library `Dionysos.jl` developed by **Julien Calbert**.
