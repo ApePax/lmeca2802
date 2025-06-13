@@ -83,6 +83,8 @@ The folders `Robotran_c/` and `Robotran_py/` follow a similar implementation to 
 - `workR/`: runs the code.
 In C there is an additionnal folder:
 - `structures/`: allows to access any structures from anywhere in the code, as long as it is defined in the structures.c and the structures.h. The CMakeFile has been modified accordingly. (/!\ follow the instruction in this code for new structures)
+In some cases, an additionnal folder was added to save the results such that they won't be erased by new simulations:
+- `data`
 
 This implemntation only allows for position control. To run the code:
 - In Python:
